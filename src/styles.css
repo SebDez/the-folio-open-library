@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: rgb(2 6 23);
+  }
+}

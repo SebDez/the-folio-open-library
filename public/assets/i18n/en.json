@@ -1,0 +1,11 @@
+{
+  "app": {
+    "title": "Folio Open Library",
+    "subtitle": "A modern Angular setup with Tailwind CSS and i18n",
+    "description": "This starter demonstrates Tailwind utility classes with ngx-translate runtime internationalization.",
+    "currentLanguage": "Current language",
+    "switchToFrench": "French",
+    "switchToEnglish": "English",
+    "cta": "Start building"
+  }
+}
