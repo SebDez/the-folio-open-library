@@ -1,5 +1,5 @@
 <app-auth-form-container>
-  <form class="space-y-8" [formGroup]="form" (ngSubmit)="submit()">
+  <form class="flex flex-col space-y-4" [formGroup]="form" (ngSubmit)="submit()">
     <app-auth-field
       id="email"
       type="email"
@@ -34,13 +34,11 @@
       </div>
     }
 
-    <div class="flex flex-col items-center gap-6 pt-4 sm:flex-row">
-      <app-auth-submit-button
-        [label]="'auth.login.submit' | translate"
-        [loadingLabel]="'auth.login.submitting' | translate"
-        [loading]="authStore.loading()"
-        [disabled]="form.invalid || authStore.loading()"
-      />
-    </div>
+    <app-auth-submit-button
+      [label]="'auth.login.submit' | translate"
+      [loadingLabel]="'auth.login.submitting' | translate"
+      [loading]="authStore.isLoggingIn()"
+      [disabled]="form.invalid || authStore.isLoggingIn()"
+    />
   </form>
 </app-auth-form-container>

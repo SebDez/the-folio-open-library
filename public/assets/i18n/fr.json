@@ -1,13 +1,4 @@
 {
-  "app": {
-    "title": "Folio Open Library",
-    "subtitle": "Une base Angular moderne avec Tailwind CSS et i18n",
-    "description": "Ce projet de depart montre les classes utilitaires Tailwind avec une internationalisation runtime via ngx-translate.",
-    "currentLanguage": "Langue actuelle",
-    "switchToFrench": "Francais",
-    "switchToEnglish": "Anglais",
-    "cta": "Commencer"
-  },
   "auth": {
     "login": {
       "metaKicker": "The Folio / Authentification",
@@ -20,6 +11,18 @@
       "submit": "Valider",
       "submitting": "Connexion…",
       "errorInvalid": "Nous n'avons pas pu vous connecter. Veuillez vérifier votre email et votre mot de passe, puis réessayez."
+    }
+  },
+  "home": {
+    "kicker": "The folio",
+    "title": "Bienvenue {{name}}",
+    "subtitle": "Recherchez un livre par son nom"
+  },
+  "layouts": {
+    "authenticated": {
+      "name": "The folio",
+      "logout": "Déconnexion",
+      "logoutSubmitting": "Déconnexion…"
     }
   }
 }

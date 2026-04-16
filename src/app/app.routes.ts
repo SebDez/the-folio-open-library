@@ -10,7 +10,16 @@ export const routes: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    loadComponent: () => import('./features/index/index.page').then((m) => m.IndexPage)
+    loadComponent: () =>
+      import('./layouts/authenticated-layout/authenticated-layout.component').then(
+        (m) => m.AuthenticatedLayoutComponent,
+      ),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/index/index.page').then((m) => m.IndexPage),
+      },
+    ],
   },
   { path: '**', redirectTo: '' }
 ];

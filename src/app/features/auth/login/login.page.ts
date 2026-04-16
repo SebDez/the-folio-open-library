@@ -41,7 +41,7 @@ export class LoginPage {
   }
 
   protected submit(): void {
-    if (this.form.invalid || this.authStore.loading()) return;
+    if (this.form.invalid || this.authStore.isLoggingIn()) return;
     const { email, password } = this.form.getRawValue();
     this.authStore.login(email, password);
   }
