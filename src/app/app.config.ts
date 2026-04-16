@@ -4,6 +4,8 @@ import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { AuthFakeLocalProvider } from './core/auth/providers/auth-fake-local.provider';
+import { AUTH_PROVIDER } from './core/auth/providers/auth.provider';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -12,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideTranslateService({ defaultLanguage: 'en' }),
-    provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' })
-  ]
+    provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' }),
+    { provide: AUTH_PROVIDER, useClass: AuthFakeLocalProvider },
+  ],
 };

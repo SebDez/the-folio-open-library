@@ -1,11 +1,31 @@
 {
-  "app": {
-    "title": "Folio Open Library",
-    "subtitle": "A modern Angular setup with Tailwind CSS and i18n",
-    "description": "This starter demonstrates Tailwind utility classes with ngx-translate runtime internationalization.",
-    "currentLanguage": "Current language",
-    "switchToFrench": "French",
-    "switchToEnglish": "English",
-    "cta": "Start building"
+  "common": {
+    "ariaLanguage": "Language"
+  },
+  "auth": {
+    "login": {
+      "metaKicker": "The Folio / Authentication",
+      "title": "Welcome",
+      "subtitle": "Please identify yourself to access your personal digital archive.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "e.g. marcel_proust@folio.local",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Submit",
+      "submitting": "Signing in…",
+      "errorInvalid": "We couldn't sign you in. Please check your email and password, then try again."
+    }
+  },
+  "home": {
+    "kicker": "The folio",
+    "title": "Welcome {{name}}",
+    "subtitle": "Search for a book by its name"
+  },
+  "layouts": {
+    "authenticated": {
+      "name": "The folio",
+      "logout": "Logout",
+      "logoutSubmitting": "Signing out…"
+    }
   }
 }

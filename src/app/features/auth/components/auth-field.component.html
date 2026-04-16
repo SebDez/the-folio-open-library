@@ -1,0 +1,13 @@
+<div class="space-y-2">
+  <label class="text-[10px] font-bold uppercase tracking-widest text-slate-900" [for]="id">
+    {{ label }}
+  </label>
+  <input
+    class="w-full border-x-0 border-t-0 border-b border-slate-900 bg-transparent p-0 pb-2 text-slate-900 placeholder:text-slate-300 focus:border-b-2 focus:ring-0"
+    [id]="id"
+    [type]="type"
+    [attr.autocomplete]="autocomplete"
+    [placeholder]="placeholder"
+    [formControl]="control"
+  />
+</div>

@@ -65,3 +65,4 @@ This project focuses on a few clear principles:
 - Stronger form validation
 - Accessibility improvements
 - Real authentication provider
+- The JWT token is stored in the localstorage for now, move to cookies to avoid theft

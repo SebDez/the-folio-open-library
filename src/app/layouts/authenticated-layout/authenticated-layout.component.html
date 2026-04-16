@@ -1,0 +1,27 @@
+<div class="flex h-dvh max-h-dvh flex-col overflow-hidden bg-white text-neutral-900">
+  <header class="sticky top-0 z-40 shrink-0 border-b-2 border-black bg-white">
+    <div
+      class="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4"
+    >
+      <h1 class="font-serif text-xl font-semibold uppercase tracking-tight text-black sm:text-2xl">
+        {{ 'layouts.authenticated.name' | translate }}
+      </h1>
+      <div class="flex items-center gap-2">
+        <app-lang-selector />
+        <app-folio-button
+          [label]="'layouts.authenticated.logout' | translate"
+          [loadingLabel]="'layouts.authenticated.logoutSubmitting' | translate"
+          [loading]="authStore.isLoggingOut()"
+          (click)="logout()"
+          [disabled]="authStore.isLoggingOut()"
+        >
+          <app-logout-icon folioButtonIcon [size]="16" [className]="'shrink-0'" />
+        </app-folio-button>
+      </div>
+    </div>
+  </header>
+
+  <div class="min-h-0 flex-1 overflow-y-auto bg-slate-50">
+    <router-outlet />
+  </div>
+</div>

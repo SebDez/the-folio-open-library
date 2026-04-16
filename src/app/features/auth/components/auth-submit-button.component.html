@@ -1,0 +1,11 @@
+<button
+  type="submit"
+  class="w-full cursor-pointer bg-slate-900 px-12 py-4 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
+  [disabled]="disabled"
+>
+  @if (!loading) {
+    <span>{{ label }}</span>
+  } @else {
+    <span>{{ loadingLabel }}</span>
+  }
+</button>
