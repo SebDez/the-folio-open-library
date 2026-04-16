@@ -1,0 +1,46 @@
+<app-auth-form-container>
+  <form class="space-y-8" [formGroup]="form" (ngSubmit)="submit()">
+    <app-auth-field
+      id="email"
+      type="email"
+      autocomplete="email"
+      [control]="form.controls.email"
+      [label]="'auth.login.emailLabel' | translate"
+      [placeholder]="'auth.login.emailPlaceholder' | translate"
+    ></app-auth-field>
+
+    <app-auth-field
+      id="password"
+      type="password"
+      autocomplete="current-password"
+      [control]="form.controls.password"
+      [label]="'auth.login.passwordLabel' | translate"
+      [placeholder]="'auth.login.passwordPlaceholder' | translate"
+    ></app-auth-field>
+
+    @if (authStore.hasErrorWhileLoggingIn()) {
+      <div
+        class="folio-pop mt-3 flex items-start gap-3 border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"
+        role="status"
+        aria-live="polite"
+      >
+        <app-info-circle-icon
+          [size]="16"
+          [className]="'mt-1 shrink-0 text-slate-400'"
+        ></app-info-circle-icon>
+        <p class="leading-relaxed">
+          {{ 'auth.login.errorInvalid' | translate }}
+        </p>
+      </div>
+    }
+
+    <div class="flex flex-col items-center gap-6 pt-4 sm:flex-row">
+      <app-auth-submit-button
+        [label]="'auth.login.submit' | translate"
+        [loadingLabel]="'auth.login.submitting' | translate"
+        [loading]="authStore.loading()"
+        [disabled]="form.invalid || authStore.loading()"
+      />
+    </div>
+  </form>
+</app-auth-form-container>

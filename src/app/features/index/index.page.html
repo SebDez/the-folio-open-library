@@ -1,0 +1,57 @@
+<main class="min-h-screen bg-slate-950 text-slate-100">
+  <section class="mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center px-6 py-16">
+    <div class="rounded-2xl border border-slate-800 bg-slate-900/70 p-8 shadow-2xl backdrop-blur">
+      <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <h1 class="text-3xl font-semibold tracking-tight">
+          {{ 'app.title' | translate }}
+        </h1>
+
+        <div class="inline-flex rounded-lg border border-slate-700 p-1">
+          <button
+            type="button"
+            class="rounded-md px-3 py-2 text-sm transition"
+            [class.bg-slate-100]="currentLang() === 'fr'"
+            [class.text-slate-900]="currentLang() === 'fr'"
+            [class.text-slate-300]="currentLang() !== 'fr'"
+            (click)="switchLanguage('fr')"
+          >
+            {{ 'app.switchToFrench' | translate }}
+          </button>
+          <button
+            type="button"
+            class="rounded-md px-3 py-2 text-sm transition"
+            [class.bg-slate-100]="currentLang() === 'en'"
+            [class.text-slate-900]="currentLang() === 'en'"
+            [class.text-slate-300]="currentLang() !== 'en'"
+            (click)="switchLanguage('en')"
+          >
+            {{ 'app.switchToEnglish' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <p class="mb-3 text-xl text-slate-200">{{ 'app.subtitle' | translate }}</p>
+      <p class="mb-8 text-slate-400">{{ 'app.description' | translate }}</p>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="rounded-full border border-slate-700 px-3 py-1 text-sm text-slate-300">
+          {{ 'app.currentLanguage' | translate }}: {{ currentLang().toUpperCase() }}
+        </span>
+
+        @if (user()?.name) {
+          <span class="rounded-full border border-slate-700 px-3 py-1 text-sm text-slate-300">
+            {{ user()?.name }}
+          </span>
+        }
+
+        <button
+          type="button"
+          class="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-400"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </section>
+</main>

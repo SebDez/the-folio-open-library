@@ -9,3 +9,20 @@
     background-color: rgb(2 6 23);
   }
 }
+
+@layer utilities {
+  @keyframes folio-pop {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .folio-pop {
+    animation: folio-pop 180ms ease-out both;
+  }
+}

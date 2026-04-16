@@ -1,22 +1,15 @@
-import { Component, inject } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-
-import { LangService, type SupportedLang } from './core/lang.service';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { LangService } from './core/lang.service';
 
 @Component({
   selector: 'app-root',
-  imports: [TranslateModule],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class AppComponent {
-  protected readonly langService = inject(LangService);
-
-  constructor() {
+  constructor(private readonly langService: LangService) {
     this.langService.initLang();
-  }
-
-  protected switchLanguage(language: SupportedLang): void {
-    this.langService.setLang(language);
   }
 }

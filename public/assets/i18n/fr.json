@@ -7,5 +7,19 @@
     "switchToFrench": "Francais",
     "switchToEnglish": "Anglais",
     "cta": "Commencer"
+  },
+  "auth": {
+    "login": {
+      "metaKicker": "The Folio / Authentification",
+      "title": "Bienvenue",
+      "subtitle": "Identifiez-vous pour accéder à votre archive numérique personnelle.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "ex. marcel_proust@folio.local",
+      "passwordLabel": "Mot de passe",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Valider",
+      "submitting": "Connexion…",
+      "errorInvalid": "Nous n'avons pas pu vous connecter. Veuillez vérifier votre email et votre mot de passe, puis réessayez."
+    }
   }
 }
