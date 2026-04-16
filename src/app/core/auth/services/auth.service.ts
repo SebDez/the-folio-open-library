@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { AuthFakeLocalProvider } from '../providers/auth-fake-local.provider';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserModel } from '../models/user.model';
+import { AUTH_PROVIDER, AuthProvider } from '../providers/auth.provider';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private authProvider: AuthFakeLocalProvider) {}
+  constructor(@Inject(AUTH_PROVIDER) private readonly authProvider: AuthProvider) {}
 
   login(email: string, password: string): Observable<UserModel> {
     return this.authProvider.login(email, password);

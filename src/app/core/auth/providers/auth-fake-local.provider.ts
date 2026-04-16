@@ -6,7 +6,7 @@ import { UserModel } from '../models/user.model';
 const VALID_EMAIL = 'admin@test.com';
 const VALID_PASSWORD = 'password';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthFakeLocalProvider implements AuthProvider {
   login(email: string, password: string): Observable<UserModel> {
     return new Observable<UserModel>((observer) => {

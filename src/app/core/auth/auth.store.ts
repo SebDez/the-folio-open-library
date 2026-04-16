@@ -20,12 +20,13 @@ export class AuthStore {
   readonly hasErrorWhileLoggingIn = this._hasErrorWhileLoggingIn.asReadonly();
   readonly isLoggingOut = this._isLoggingOut.asReadonly();
   readonly isLoggedIn = computed<boolean>(() => {
-    return this._user() !== null && this._user()?.token !== null;
+    const token = this._user()?.token;
+    return Boolean(token?.trim());
   });
 
   // Subjects
-  private logoutSubject = new Subject<void>();
-  logoutObs$ = this.logoutSubject.asObservable();
+  private readonly logoutSubject = new Subject<void>();
+  readonly logoutObs$ = this.logoutSubject.asObservable();
 
   constructor(
     private authService: AuthService,
@@ -76,7 +77,7 @@ export class AuthStore {
 
   private initFromStorage(): void {
     const storedUser = this.localStorageService.getItem<UserModel>(AUTH_USER_STORAGE_KEY);
-    if (storedUser?.token) {
+    if (storedUser && storedUser.token?.trim()) {
       this._user.set(storedUser);
     }
   }
