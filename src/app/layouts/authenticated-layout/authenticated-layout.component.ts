@@ -1,15 +1,22 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterOutlet } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { AuthStore } from '../../core/auth/auth.store';
 import { FolioButtonComponent } from '../../shared/ui/folio-button/folio-button.component';
 import { LogoutIconComponent } from '../../shared/icons/logout-icon.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { LangSelectorComponent } from '../../shared/ui/lang-selector/lang-selector.component';
 
 @Component({
   selector: 'app-authenticated-layout',
   standalone: true,
-  imports: [RouterOutlet, FolioButtonComponent, LogoutIconComponent, TranslateModule],
+  imports: [
+    RouterOutlet,
+    FolioButtonComponent,
+    LogoutIconComponent,
+    TranslateModule,
+    LangSelectorComponent,
+  ],
   templateUrl: './authenticated-layout.component.html',
 })
 export class AuthenticatedLayoutComponent {

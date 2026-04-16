@@ -1,5 +1,6 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from './storage/local-storage.service';
 
 export const SUPPORTED_LANGS = ['fr', 'en'] as const;
 export type SupportedLang = (typeof SUPPORTED_LANGS)[number];
@@ -8,39 +9,37 @@ const STORAGE_KEY = 'the-folio-open-library-lang';
 
 @Injectable({ providedIn: 'root' })
 export class LangService {
-  private readonly translate = inject(TranslateService);
+  constructor(
+    private readonly translateService: TranslateService,
+    private readonly localStorageService: LocalStorageService,
+  ) {}
 
   readonly supported: { code: SupportedLang; label: string }[] = [
     { code: 'fr', label: 'Français' },
-    { code: 'en', label: 'English' }
+    { code: 'en', label: 'English' },
   ];
 
   initLang(): void {
-    this.translate.addLangs([...SUPPORTED_LANGS]);
-    const stored =
-      typeof localStorage !== 'undefined'
-        ? (localStorage.getItem(STORAGE_KEY) as SupportedLang | null)
-        : null;
+    this.translateService.addLangs([...SUPPORTED_LANGS]);
+    const stored = this.localStorageService.getItem<SupportedLang>(STORAGE_KEY);
 
     if (stored && SUPPORTED_LANGS.includes(stored)) {
-      this.translate.use(stored);
+      this.translateService.use(stored);
       return;
     }
 
-    this.translate.use(this.getBrowserLang());
+    this.translateService.use(this.getBrowserLang());
   }
 
   get currentLang(): SupportedLang {
-    const current = this.translate.currentLang;
+    const current = this.translateService.currentLang;
     const base = current?.slice(0, 2);
     return SUPPORTED_LANGS.includes(base as SupportedLang) ? (base as SupportedLang) : 'en';
   }
 
   setLang(lang: SupportedLang): void {
-    this.translate.use(lang);
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(STORAGE_KEY, lang);
-    }
+    this.translateService.use(lang);
+    this.localStorageService.setItem(STORAGE_KEY, lang);
   }
 
   private getBrowserLang(): SupportedLang {

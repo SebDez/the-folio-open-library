@@ -1,0 +1,41 @@
+<div
+  class="relative inline-block"
+  role="combobox"
+  [attr.aria-expanded]="isSelectorOpen()"
+  [attr.aria-haspopup]="'listbox'"
+  [attr.aria-label]="'common.ariaLanguage' | translate"
+>
+  <button
+    type="button"
+    class="cursor-pointer inline-flex items-center justify-center gap-2 rounded-none border-2 border-black bg-white px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-black hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:pointer-events-none disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-black"
+    (click)="toggle()"
+    [attr.aria-expanded]="isSelectorOpen()"
+    [attr.aria-label]="'common.ariaLanguage' | translate"
+  >
+    <span class="uppercase">{{ currentLang() }}</span>
+  </button>
+  @if (isSelectorOpen()) {
+    <ul
+      class="absolute right-0 top-full z-50 mt-1 min-w-40 border-2 border-black bg-white py-1"
+      role="listbox"
+    >
+      @for (opt of langService.supported; track opt.code) {
+        <li role="option" [attr.aria-selected]="currentLang() === opt.code">
+          <button
+            type="button"
+            class="flex w-full items-center gap-2 px-4 py-2 text-left text-sm font-medium text-black transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            [class.bg-black]="currentLang() === opt.code"
+            [class.text-white]="currentLang() === opt.code"
+            [class.hover:bg-black]="currentLang() !== opt.code"
+            [class.hover:text-white]="currentLang() !== opt.code"
+            [class.cursor-pointer]="currentLang() !== opt.code"
+            (click)="selectLang(opt.code)"
+          >
+            <span class="uppercase">{{ opt.code }}</span>
+            <span>{{ opt.label }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</div>

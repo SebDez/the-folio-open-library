@@ -1,4 +1,7 @@
 {
+  "common": {
+    "ariaLanguage": "Language"
+  },
   "auth": {
     "login": {
       "metaKicker": "The Folio / Authentication",
