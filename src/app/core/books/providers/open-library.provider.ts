@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, throwError } from 'rxjs';
 
 import {
   mapOpenLibraryBookDtoToBookModel,
@@ -52,9 +52,14 @@ export class OpenLibraryProvider implements BookProvider {
 
   getByBookId(bookId: string): Observable<BookDetailsModel> {
     const normalizedBookId = this.normalizeBookId(bookId);
+    if (!this.isValidBookId(normalizedBookId)) {
+      return throwError(() => new Error('Invalid book id'));
+    }
 
     return this.httpClient
-      .get<OpenLibraryBookDetailDto>(`https://openlibrary.org/works/${normalizedBookId}.json`)
+      .get<OpenLibraryBookDetailDto>(
+        `https://openlibrary.org/works/${encodeURIComponent(normalizedBookId)}.json`,
+      )
       .pipe(
         map((response) =>
           {
@@ -88,5 +93,9 @@ export class OpenLibraryProvider implements BookProvider {
     }
 
     return trimmedValue.replace(/^\/authors\//, '');
+  }
+
+  private isValidBookId(bookId: string): boolean {
+    return /^OL\d+W$/i.test(bookId);
   }
 }

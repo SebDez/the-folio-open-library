@@ -2,6 +2,12 @@
   "common": {
     "ariaLanguage": "Langue"
   },
+  "shared": {
+    "image": {
+      "noCover": "Pas de couverture",
+      "loading": "Chargement de la couverture"
+    }
+  },
   "auth": {
     "login": {
       "metaKicker": "The Folio / Authentification",
@@ -52,10 +58,6 @@
       "unknownPublishYear": "Année de publication inconnue",
       "untitled": "Sans titre",
       "unknownAuthor": "Auteur inconnu"
-    },
-    "cover": {
-      "noCover": "Pas de couverture",
-      "loading": "Chargement de la couverture"
     },
     "pagination": {
       "previousAria": "Page précédente",

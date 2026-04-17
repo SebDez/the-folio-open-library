@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable, forkJoin, of } from 'rxjs';
+import { Observable, catchError, forkJoin, map, of } from 'rxjs';
 
 import { AuthorModel } from '../models/author.model';
 import { AUTHOR_PROVIDER, AuthorProvider } from '../providers/author.provider';
@@ -21,6 +21,13 @@ export class AuthorService {
       return of([]);
     }
 
-    return forkJoin(uniqueAuthorIds.map((authorId) => this.authorProvider.getByAuthorId(authorId)));
+    return forkJoin(
+      uniqueAuthorIds.map((authorId) =>
+        this.authorProvider.getByAuthorId(authorId).pipe(catchError(() => of(null))),
+      ),
+    ).pipe(
+      map((authors) => authors.filter((author): author is AuthorModel => author !== null)),
+      catchError(() => of([])),
+    );
   }
 }

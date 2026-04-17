@@ -1,17 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { catchError, distinctUntilChanged, filter, map, of, switchMap, tap } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap } from 'rxjs';
 
-import { AuthorModel } from '../../core/authors/models/author.model';
-import { AuthorService } from '../../core/authors/services/author.service';
-import { BookDetailsModel } from '../../core/books/models/book.model';
-import { BookService } from '../../core/books/services/book.service';
-import { FavoriteStore } from '../../core/favorites/favorite.store';
 import { BookDetailsContentComponent } from './components/book-details-content/book-details-content.component';
 import { BooksEmptyDisplayComponent } from '../index/components/books-empty-display/books-empty-display.component';
+import { BookDetailStore } from './book-detail.store';
 
 @Component({
   selector: 'app-book-page',
@@ -27,64 +23,28 @@ import { BooksEmptyDisplayComponent } from '../index/components/books-empty-disp
 })
 export class BookPage {
   private readonly destroyRef = inject(DestroyRef);
-
-  protected readonly book = signal<BookDetailsModel | null>(null);
-  protected readonly authors = signal<AuthorModel[]>([]);
-  protected readonly isLoading = signal<boolean>(true);
-  protected readonly hasError = signal<boolean>(false);
-
-  protected readonly isFavorite = computed<boolean>(() => {
-    const currentBook = this.book();
-    return currentBook ? this.favoriteStore.isFavorite(currentBook.id) : false;
-  });
+  private readonly store = inject(BookDetailStore);
+  protected readonly book = this.store.book;
+  protected readonly authors = this.store.authors;
+  protected readonly isLoading = this.store.isLoading;
+  protected readonly hasError = this.store.hasError;
+  protected readonly isFavorite = this.store.isFavorite;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly bookService: BookService,
-    private readonly authorService: AuthorService,
-    protected readonly favoriteStore: FavoriteStore,
   ) {
     this.activatedRoute.paramMap
       .pipe(
         map((params) => (params.get('id') ?? '').trim()),
         filter((bookId) => Boolean(bookId)),
         distinctUntilChanged(),
-        tap(() => {
-          this.isLoading.set(true);
-          this.hasError.set(false);
-          this.book.set(null);
-          this.authors.set([]);
-        }),
-        switchMap((bookId) =>
-          this.bookService.getByBookId(bookId).pipe(
-            switchMap((book) =>
-              this.authorService.getByAuthorIds(book.authorIds ?? []).pipe(
-                map((authors) => ({ kind: 'success' as const, book, authors })),
-              ),
-            ),
-            catchError(() => of({ kind: 'error' as const })),
-          ),
-        ),
+        switchMap((bookId) => this.store.load(bookId)),
         takeUntilDestroyed(this.destroyRef),
       )
-      .subscribe((event) => {
-        this.isLoading.set(false);
-        if (event.kind === 'error') {
-          this.hasError.set(true);
-          return;
-        }
-
-        this.book.set(event.book);
-        this.authors.set(event.authors);
-      });
+      .subscribe();
   }
 
   protected toggleFavorite(): void {
-    const currentBook = this.book();
-    if (!currentBook) {
-      return;
-    }
-
-    this.favoriteStore.toggleFavorite(currentBook);
+    this.store.toggleFavorite();
   }
 }
