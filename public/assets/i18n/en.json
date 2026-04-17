@@ -25,7 +25,16 @@
     "authenticated": {
       "name": "The folio",
       "logout": "Logout",
-      "logoutSubmitting": "Signing out…"
+      "logoutSubmitting": "Signing out…",
+      "aria": {
+        "openSidebar": "Open sidebar",
+        "closeSidebar": "Close sidebar"
+      },
+      "modules": {
+        "search": "Search",
+        "favorites": "Favorites",
+        "about": "About"
+      }
     }
   }
 }

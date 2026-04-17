@@ -1,27 +1,114 @@
 <div class="flex h-dvh max-h-dvh flex-col overflow-hidden bg-white text-neutral-900">
-  <header class="sticky top-0 z-40 shrink-0 border-b-2 border-black bg-white">
-    <div
-      class="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4"
-    >
-      <h1 class="font-serif text-xl font-semibold uppercase tracking-tight text-black sm:text-2xl">
-        {{ 'layouts.authenticated.name' | translate }}
-      </h1>
-      <div class="flex items-center gap-2">
-        <app-lang-selector />
-        <app-folio-button
-          [label]="'layouts.authenticated.logout' | translate"
-          [loadingLabel]="'layouts.authenticated.logoutSubmitting' | translate"
-          [loading]="authStore.isLoggingOut()"
-          (click)="logout()"
-          [disabled]="authStore.isLoggingOut()"
+  <!-- HEADER -->
+  <header
+    class="sticky top-0 z-50 shrink-0 border-b-2 border-black bg-white transition-all duration-300 {{
+      isSidebarOpen() ? 'lg:pl-88' : 'lg:pl-0'
+    }}"
+  >
+    <div class="mx-auto flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4">
+      <div class="flex items-center gap-4 sm:gap-6">
+        <button
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center text-black transition-opacity hover:opacity-70"
+          (click)="toggleSidebar()"
+          [attr.aria-label]="
+            (isSidebarOpen()
+              ? 'layouts.authenticated.aria.closeSidebar'
+              : 'layouts.authenticated.aria.openSidebar'
+            ) | translate
+          "
+          [attr.aria-expanded]="isSidebarOpen()"
         >
-          <app-logout-icon folioButtonIcon [size]="16" [className]="'shrink-0'" />
-        </app-folio-button>
+          <app-menu-icon [size]="24" [className]="'h-6 w-6'" />
+        </button>
+        <h1 class="font-serif text-2xl font-semibold tracking-tight text-black sm:text-3xl">
+          {{ 'layouts.authenticated.name' | translate }}
+        </h1>
+      </div>
+      <div class="hidden items-center gap-8 md:flex">
+        <nav class="flex items-center gap-8">
+          @for (module of modules(); track module.route) {
+            <a
+              [routerLink]="module.route"
+              routerLinkActive
+              #rla="routerLinkActive"
+              [ngClass]="[
+                'font-sans text-xs uppercase tracking-[0.2em]',
+                rla.isActive
+                  ? ' text-black font-bold'
+                  : 'cursor-pointer text-neutral-500 hover:text-black',
+              ]"
+              (click)="handleSidebarNavigation()"
+            >
+              <span>{{ module.labelKey | translate }}</span>
+            </a>
+          }
+        </nav>
       </div>
     </div>
   </header>
 
-  <div class="min-h-0 flex-1 overflow-y-auto bg-slate-50">
-    <router-outlet />
+  <!-- SIDEBAR -->
+  <aside
+    class="fixed left-0 top-0 z-40 flex h-dvh w-80 max-w-[85vw] flex-col border-r-2 border-black bg-[#f9f9f9] p-8 transition-transform duration-300"
+    [class.-translate-x-full]="!isSidebarOpen()"
+    [class.translate-x-0]="isSidebarOpen()"
+  >
+    <div class="mb-8 pt-16 text-3xl font-serif font-bold text-black">
+      {{ 'layouts.authenticated.name' | translate }}
+    </div>
+    <nav class="space-y-6">
+      @for (module of modules(); track module.route) {
+        <a
+          [routerLink]="module.route"
+          class="group flex items-center gap-4"
+          routerLinkActive
+          #rla="routerLinkActive"
+          [ngClass]="
+            rla.isActive
+              ? 'underline decoration-2 underline-offset-4 font-bold text-black'
+              : 'text-neutral-600 transition-transform duration-200 hover:translate-x-2 hover:text-black'
+          "
+          (click)="handleSidebarNavigation()"
+        >
+          @switch (module.key) {
+            @case ('search') {
+              <app-search-icon [size]="24" [className]="'h-6 w-6 shrink-0'" />
+            }
+            @case ('favorites') {
+              <app-heart-icon [size]="24" [className]="'h-6 w-6 shrink-0'" />
+            }
+            @case ('about') {
+              <app-info-circle-icon [size]="24" [className]="'h-6 w-6 shrink-0'" />
+            }
+          }
+          <span class="font-serif text-xl">{{ module.labelKey | translate }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="mt-auto flex items-center justify-between border-t border-black/20 pt-6">
+      <app-lang-selector />
+      <app-folio-button
+        [label]="'layouts.authenticated.logout' | translate"
+        [loadingLabel]="'layouts.authenticated.logoutSubmitting' | translate"
+        [loading]="authStore.isLoggingOut()"
+        (click)="logout()"
+        [disabled]="authStore.isLoggingOut()"
+      >
+        <app-logout-icon folioButtonIcon [size]="16" [className]="'shrink-0'" />
+      </app-folio-button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTAINER -->
+  <div class="relative min-h-0 flex-1 overflow-y-auto bg-slate-50">
+    <main
+      class="mx-auto min-h-full w-full max-w-screen-2xl px-4 py-6 transition-all duration-300 sm:px-6 sm:py-8 {{
+        isSidebarOpen() ? 'lg:pl-88' : 'lg:pl-0'
+      }}"
+    >
+      <router-outlet />
+    </main>
   </div>
 </div>

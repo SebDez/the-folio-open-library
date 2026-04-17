@@ -25,7 +25,16 @@
     "authenticated": {
       "name": "The folio",
       "logout": "Déconnexion",
-      "logoutSubmitting": "Déconnexion…"
+      "logoutSubmitting": "Déconnexion…",
+      "aria": {
+        "openSidebar": "Ouvrir la barre latérale",
+        "closeSidebar": "Fermer la barre latérale"
+      },
+      "modules": {
+        "search": "Recherche",
+        "favorites": "Favoris",
+        "about": "À propos"
+      }
     }
   }
 }
