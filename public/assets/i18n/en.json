@@ -7,6 +7,12 @@
       "metaKicker": "The Folio / Authentication",
       "title": "Welcome",
       "subtitle": "Please identify yourself to access your personal digital archive.",
+      "left": {
+        "brand": "THE FOLIO",
+        "kicker": "J.R.R. Tolkien / The Lord of the Rings: The Fellowship of the Ring",
+        "quote": "\"There is some good in this world, Mr. Frodo, and it's worth fighting for.\"",
+        "footer": "© SebDez 2026"
+      },
       "emailLabel": "Email",
       "emailPlaceholder": "e.g. marcel_proust@folio.local",
       "passwordLabel": "Password",

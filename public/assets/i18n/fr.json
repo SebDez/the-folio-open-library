@@ -7,6 +7,12 @@
       "metaKicker": "The Folio / Authentification",
       "title": "Bienvenue",
       "subtitle": "Identifiez-vous pour accéder à votre archive numérique personnelle.",
+      "left": {
+        "brand": "THE FOLIO",
+        "kicker": "J.R.R. Tolkien / Le Seigneur des anneaux : La Communauté de l'Anneau",
+        "quote": "\"Il y a du bon en ce monde, monsieur Frodon, et il faut se battre pour cela.\"",
+        "footer": "© SebDez 2026"
+      },
       "emailLabel": "Email",
       "emailPlaceholder": "ex. marcel_proust@folio.local",
       "passwordLabel": "Mot de passe",
