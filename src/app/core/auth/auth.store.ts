@@ -3,6 +3,8 @@ import { AuthService } from './services/auth.service';
 import { UserModel } from './models/user.model';
 import { Subject } from 'rxjs';
 import { LocalStorageService } from '../storage/local-storage.service';
+import { BookStore } from '../books/book.store';
+import { FavoriteStore } from '../favorites/favorite.store';
 
 const AUTH_USER_STORAGE_KEY = 'auth_user';
 
@@ -31,6 +33,8 @@ export class AuthStore {
   constructor(
     private authService: AuthService,
     private localStorageService: LocalStorageService,
+    private bookStore: BookStore,
+    private favoriteStore: FavoriteStore,
   ) {
     this.initFromStorage();
   }
@@ -43,6 +47,7 @@ export class AuthStore {
       next: (user) => {
         this._user.set(user);
         this.localStorageService.setItem(AUTH_USER_STORAGE_KEY, user);
+        this.favoriteStore.initFromStorage();
         this._hasErrorWhileLoggingIn.set(false);
       },
       error: () => {
@@ -59,12 +64,16 @@ export class AuthStore {
     this._isLoggingOut.set(true);
     this.authService.logout().subscribe({
       complete: () => {
+        this.bookStore.reset();
+        this.favoriteStore.reset();
         this._user.set(null);
         this.localStorageService.removeItem(AUTH_USER_STORAGE_KEY);
         this.logoutSubject.next();
         this._isLoggingOut.set(false);
       },
       error: () => {
+        this.bookStore.reset();
+        this.favoriteStore.reset();
         this._user.set(null);
         this.localStorageService.removeItem(AUTH_USER_STORAGE_KEY);
         this.logoutSubject.next();
@@ -79,6 +88,7 @@ export class AuthStore {
     const storedUser = this.localStorageService.getItem<UserModel>(AUTH_USER_STORAGE_KEY);
     if (storedUser && storedUser.token?.trim()) {
       this._user.set(storedUser);
+      this.favoriteStore.initFromStorage();
     }
   }
 }

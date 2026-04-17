@@ -106,6 +106,17 @@ export class BookStore {
     this._fetchPage(targetPage);
   }
 
+  reset(): void {
+    this._books.set([]);
+    this._total.set(0);
+    this._currentPage.set(0);
+    this._lastQuery.set('');
+    this._lastFetchedQuery.set('');
+    this._lastFetchedPage.set(-1);
+    this._isSearching.set(false);
+    this._hasErrorWhileSearching.set(false);
+  }
+
   private _fetchPage(pageIndex: number): void {
     const query = this._lastQuery();
     if (!query) return;

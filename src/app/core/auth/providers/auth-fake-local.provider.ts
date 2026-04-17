@@ -13,6 +13,7 @@ export class AuthFakeLocalProvider implements AuthProvider {
       setTimeout(() => {
         if (email === VALID_EMAIL && password === VALID_PASSWORD) {
           observer.next({
+            id: 'user-1',
             name: 'John Doe',
             token: 'fake-jwt-token',
           });

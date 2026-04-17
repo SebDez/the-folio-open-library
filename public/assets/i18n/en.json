@@ -47,7 +47,8 @@
     },
     "grid": {
       "bookCoverAlt": "Book cover",
-      "favoriteAria": "Add to favorites",
+      "favoriteAddAria": "Add to favorites",
+      "favoriteRemoveAria": "Remove from favorites",
       "unknownPublishYear": "Unknown publish year",
       "untitled": "Untitled",
       "unknownAuthor": "Unknown author"
@@ -62,6 +63,15 @@
       "showing": "Showing {{start}} - {{end}} of {{total}} volumes"
     }
   },
+  "favorites": {
+    "kicker": "The folio / Favorites",
+    "title": "My favorites",
+    "subtitle": "Find all your selected favorite books here.",
+    "result": {
+      "count": "{{total}} Favorite(s)"
+    },
+    "empty": "No favorites yet. Add some from search."
+  },
   "layouts": {
     "authenticated": {
       "name": "The folio",
@@ -69,7 +79,8 @@
       "logoutSubmitting": "Signing out…",
       "aria": {
         "openSidebar": "Open sidebar",
-        "closeSidebar": "Close sidebar"
+        "closeSidebar": "Close sidebar",
+        "favoritesCount": "{{total}} favorite(s)"
       },
       "modules": {
         "search": "Search",

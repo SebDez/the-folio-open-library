@@ -47,7 +47,8 @@
     },
     "grid": {
       "bookCoverAlt": "Couverture du livre",
-      "favoriteAria": "Ajouter aux favoris",
+      "favoriteAddAria": "Ajouter aux favoris",
+      "favoriteRemoveAria": "Retirer des favoris",
       "unknownPublishYear": "Année de publication inconnue",
       "untitled": "Sans titre",
       "unknownAuthor": "Auteur inconnu"
@@ -62,6 +63,15 @@
       "showing": "Affichage de {{start}} à {{end}} sur {{total}} volumes"
     }
   },
+  "favorites": {
+    "kicker": "The folio / Favoris",
+    "title": "Mes favoris",
+    "subtitle": "Retrouvez ici votre sélection de livres favoris.",
+    "result": {
+      "count": "{{total}} favori(s)"
+    },
+    "empty": "Aucun favori pour le moment. Ajoutez-en depuis la recherche."
+  },
   "layouts": {
     "authenticated": {
       "name": "The folio",
@@ -69,7 +79,8 @@
       "logoutSubmitting": "Déconnexion…",
       "aria": {
         "openSidebar": "Ouvrir la barre latérale",
-        "closeSidebar": "Fermer la barre latérale"
+        "closeSidebar": "Fermer la barre latérale",
+        "favoritesCount": "{{total}} favori(s)"
       },
       "modules": {
         "search": "Recherche",
