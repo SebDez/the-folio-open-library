@@ -1,0 +1,34 @@
+<div class="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  @for (book of books; track book.id) {
+    <article class="group">
+      <div class="relative mb-4 aspect-3/4 overflow-hidden border-b-2 border-black bg-slate-100">
+        <app-book-cover
+          [src]="getBookCoverUrl(book.coverId)"
+          [alt]="book.title || ('index.grid.bookCoverAlt' | translate)"
+        ></app-book-cover>
+        <div
+          class="absolute right-3 top-3 translate-x-14 transition-transform duration-300 group-hover:translate-x-0"
+        >
+          <button
+            type="button"
+            class="cursor-pointer flex h-10 w-10 items-center justify-center border-2 border-black bg-white text-slate-900 transition hover:bg-black hover:text-white"
+            [attr.aria-label]="'index.grid.favoriteAria' | translate"
+          >
+            <app-heart-icon [size]="18"></app-heart-icon>
+          </button>
+        </div>
+      </div>
+      <p class="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+        {{ book.publishYear ? book.publishYear : ('index.grid.unknownPublishYear' | translate) }}
+      </p>
+      <h3
+        class="cursor-pointer line-clamp-2 font-serif text-2xl leading-tight group-hover:underline"
+      >
+        {{ book.title || ('index.grid.untitled' | translate) }}
+      </h3>
+      <p class="mt-1 text-sm text-slate-600">
+        {{ book.authors.length ? book.authors.join(', ') : ('index.grid.unknownAuthor' | translate) }}
+      </p>
+    </article>
+  }
+</div>

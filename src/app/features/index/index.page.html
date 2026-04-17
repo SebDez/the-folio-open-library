@@ -1,19 +1,76 @@
-<section class="mx-auto max-w-6xl flex items-center justify-center px-6 py-12">
-  <div class="w-full overflow-hidden border-b-2 border-l-2 border-slate-900 bg-white">
-    <div class="flex flex-col justify-center p-8 md:p-16">
-      <div class="mb-12">
-        <span
-          class="mb-2 block text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500"
-        >
-          {{ 'home.kicker' | translate }}
-        </span>
-        <h1 class="font-serif text-5xl font-semibold tracking-tight text-slate-900 md:text-6xl">
-          {{ 'home.title' | translate: homeTitleParams() }}
-        </h1>
-        <p class="mt-4 max-w-sm text-slate-500">
-          {{ 'home.subtitle' | translate }}
+<main class="mx-auto w-full max-w-7xl px-6 py-10 md:px-10 md:py-12">
+  <!-- HEAD -->
+  <section class="mb-8">
+    <span class="mb-4 block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+      {{ 'home.kicker' | translate }}
+    </span>
+    <div class="flex flex-col gap-6 border-b-2 border-black pb-8">
+      <h1
+        class="font-serif text-5xl font-semibold leading-none tracking-tight text-slate-900 md:text-7xl"
+      >
+        {{ 'home.title' | translate: homeTitleParams() }}
+      </h1>
+      <p class="text-sm leading-relaxed text-slate-500">
+        {{ 'home.subtitle' | translate }}
+      </p>
+    </div>
+  </section>
+
+  <!-- SEARCH BAR -->
+  <div class="mb-8">
+    <app-books-search-bar
+      [value]="searchInput()"
+      [loading]="bookStore.isSearching()"
+      (valueChange)="searchInput.set($event)"
+      (search)="searchBooks()"
+    ></app-books-search-bar>
+  </div>
+
+  @if (bookStore.isSearching()) {
+    <app-books-empty-display
+      [message]="'index.state.searching' | translate"
+    ></app-books-empty-display>
+  } @else if (bookStore.hasErrorWhileSearching()) {
+    <app-books-empty-display [message]="'index.state.error' | translate"></app-books-empty-display>
+  } @else if (!bookStore.isSearching() && bookStore.books().length > 0) {
+    <section class="space-y-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+          {{ 'index.result.count' | translate: { total: bookStore.totalResults() } }}
+        </p>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+          {{
+            'index.result.page'
+              | translate: { current: bookStore.currentPage() + 1, total: bookStore.totalPages() }
+          }}
         </p>
       </div>
-    </div>
-  </div>
-</section>
+
+      <app-books-results-grid [books]="bookStore.books()"></app-books-results-grid>
+
+      @if (bookStore.totalPages() > 1) {
+        <app-books-pagination
+          [currentPage]="bookStore.currentPage() + 1"
+          [totalPages]="bookStore.totalPages()"
+          [canGoPrevious]="bookStore.hasPreviousPage()"
+          [canGoNext]="bookStore.hasNextPage()"
+          [isLoading]="bookStore.isSearching()"
+          [startItem]="bookStore.currentPage() * bookStore.PAGE_SIZE + 1"
+          [endItem]="bookStore.currentPage() * bookStore.PAGE_SIZE + bookStore.books().length"
+          [totalResults]="bookStore.totalResults()"
+          (previous)="bookStore.goToPreviousPage()"
+          (next)="bookStore.goToNextPage()"
+          (pageSelected)="goToPage($event)"
+        ></app-books-pagination>
+      }
+    </section>
+  } @else if (bookStore.lastQuery()) {
+    <app-books-empty-display
+      [message]="'index.empty.noResults' | translate: { query: bookStore.lastQuery() }"
+    ></app-books-empty-display>
+  } @else {
+    <app-books-empty-display
+      [message]="'index.empty.initial' | translate"
+    ></app-books-empty-display>
+  }
+</main>

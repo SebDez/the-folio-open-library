@@ -1,0 +1,26 @@
+<div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-3 md:flex-row">
+    <label class="relative block w-full">
+      <span class="pointer-events-none absolute inset-y-0 left-4 flex items-center text-slate-500">
+        <app-search-icon [size]="18"></app-search-icon>
+      </span>
+      <input
+        type="text"
+        class="w-full border-2 border-black bg-white py-3 pl-12 pr-4 text-sm font-medium tracking-wide text-slate-900 outline-none transition focus:border-slate-700"
+        [placeholder]="'index.search.placeholder' | translate"
+        [ngModel]="value"
+        (ngModelChange)="onInputChange($event)"
+        (keydown.enter)="onSearch()"
+      />
+    </label>
+    <app-folio-button
+      [label]="'index.search.cta' | translate"
+      [loadingLabel]="'index.search.loading' | translate"
+      [loading]="loading"
+      [disabled]="loading"
+      [fullHeight]="true"
+      [fullWidth]="true"
+      (click)="onSearch()"
+    ></app-folio-button>
+  </div>
+</div>

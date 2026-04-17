@@ -7,6 +7,12 @@
       "metaKicker": "The Folio / Authentication",
       "title": "Welcome",
       "subtitle": "Please identify yourself to access your personal digital archive.",
+      "left": {
+        "brand": "THE FOLIO",
+        "kicker": "J.R.R. Tolkien / The Lord of the Rings: The Fellowship of the Ring",
+        "quote": "\"There is some good in this world, Mr. Frodo, and it's worth fighting for.\"",
+        "footer": "© SebDez 2026"
+      },
       "emailLabel": "Email",
       "emailPlaceholder": "e.g. marcel_proust@folio.local",
       "passwordLabel": "Password",
@@ -19,13 +25,57 @@
   "home": {
     "kicker": "The folio",
     "title": "Welcome {{name}}",
-    "subtitle": "Search for a book by its name"
+    "subtitle": "Search for a book by title or author… and let yourself be surprised by new discoveries!"
+  },
+  "index": {
+    "search": {
+      "placeholder": "Search a book title",
+      "cta": "Search",
+      "loading": "Searching..."
+    },
+    "state": {
+      "searching": "Searching...",
+      "error": "We couldn't search for books. Please try again."
+    },
+    "result": {
+      "count": "{{total}} Result(s)",
+      "page": "Page {{current}} / {{total}}"
+    },
+    "empty": {
+      "noResults": "No results for: {{query}}",
+      "initial": "Enter the title of a book to launch your search."
+    },
+    "grid": {
+      "bookCoverAlt": "Book cover",
+      "favoriteAria": "Add to favorites",
+      "unknownPublishYear": "Unknown publish year",
+      "untitled": "Untitled",
+      "unknownAuthor": "Unknown author"
+    },
+    "cover": {
+      "noCover": "No Cover",
+      "loading": "Loading Cover"
+    },
+    "pagination": {
+      "previousAria": "Previous page",
+      "nextAria": "Next page",
+      "showing": "Showing {{start}} - {{end}} of {{total}} volumes"
+    }
   },
   "layouts": {
     "authenticated": {
       "name": "The folio",
       "logout": "Logout",
-      "logoutSubmitting": "Signing out…"
+      "logoutSubmitting": "Signing out…",
+      "aria": {
+        "openSidebar": "Open sidebar",
+        "closeSidebar": "Close sidebar"
+      },
+      "modules": {
+        "search": "Search",
+        "favorites": "Favorites",
+        "about": "About"
+      }
     }
   }
 }

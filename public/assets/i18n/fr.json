@@ -7,6 +7,12 @@
       "metaKicker": "The Folio / Authentification",
       "title": "Bienvenue",
       "subtitle": "Identifiez-vous pour accéder à votre archive numérique personnelle.",
+      "left": {
+        "brand": "THE FOLIO",
+        "kicker": "J.R.R. Tolkien / Le Seigneur des anneaux : La Communauté de l'Anneau",
+        "quote": "\"Il y a du bon en ce monde, monsieur Frodon, et il faut se battre pour cela.\"",
+        "footer": "© SebDez 2026"
+      },
       "emailLabel": "Email",
       "emailPlaceholder": "ex. marcel_proust@folio.local",
       "passwordLabel": "Mot de passe",
@@ -19,13 +25,57 @@
   "home": {
     "kicker": "The folio",
     "title": "Bienvenue {{name}}",
-    "subtitle": "Recherchez un livre par son nom"
+    "subtitle": "Cherchez un livre par titre ou auteur… et laissez-vous surprendre par de nouvelles découvertes !"
+  },
+  "index": {
+    "search": {
+      "placeholder": "Rechercher un titre de livre",
+      "cta": "Rechercher",
+      "loading": "Recherche..."
+    },
+    "state": {
+      "searching": "Recherche en cours...",
+      "error": "Nous n'avons pas pu rechercher les livres. Veuillez réessayer."
+    },
+    "result": {
+      "count": "{{total}} résultat(s)",
+      "page": "Page {{current}} / {{total}}"
+    },
+    "empty": {
+      "noResults": "Aucun résultat pour : {{query}}",
+      "initial": "Saisissez le titre d'un livre pour lancer votre recherche."
+    },
+    "grid": {
+      "bookCoverAlt": "Couverture du livre",
+      "favoriteAria": "Ajouter aux favoris",
+      "unknownPublishYear": "Année de publication inconnue",
+      "untitled": "Sans titre",
+      "unknownAuthor": "Auteur inconnu"
+    },
+    "cover": {
+      "noCover": "Pas de couverture",
+      "loading": "Chargement de la couverture"
+    },
+    "pagination": {
+      "previousAria": "Page précédente",
+      "nextAria": "Page suivante",
+      "showing": "Affichage de {{start}} à {{end}} sur {{total}} volumes"
+    }
   },
   "layouts": {
     "authenticated": {
       "name": "The folio",
       "logout": "Déconnexion",
-      "logoutSubmitting": "Déconnexion…"
+      "logoutSubmitting": "Déconnexion…",
+      "aria": {
+        "openSidebar": "Ouvrir la barre latérale",
+        "closeSidebar": "Fermer la barre latérale"
+      },
+      "modules": {
+        "search": "Recherche",
+        "favorites": "Favoris",
+        "about": "À propos"
+      }
     }
   }
 }
