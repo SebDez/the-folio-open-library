@@ -6,7 +6,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { AuthStore } from '../../../core/auth/auth.store';
 import { AuthFieldComponent } from '../components/auth-field.component';
-import { AuthFormContainerComponent } from '../components/auth-form-container.component';
 import { AuthSubmitButtonComponent } from '../components/auth-submit-button.component';
 import { InfoCircleIconComponent } from '../../../shared/icons/info-circle-icon.component';
 
@@ -17,7 +16,6 @@ import { InfoCircleIconComponent } from '../../../shared/icons/info-circle-icon.
     CommonModule,
     ReactiveFormsModule,
     TranslateModule,
-    AuthFormContainerComponent,
     AuthFieldComponent,
     AuthSubmitButtonComponent,
     InfoCircleIconComponent,

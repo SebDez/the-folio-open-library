@@ -8,6 +8,8 @@ import { AuthFakeLocalProvider } from './core/auth/providers/auth-fake-local.pro
 import { AUTH_PROVIDER } from './core/auth/providers/auth.provider';
 import { BOOK_PROVIDER } from './core/books/providers/book.provider';
 import { OpenLibraryProvider } from './core/books/providers/open-library.provider';
+import { FavoriteLocalStorageProvider } from './core/favorites/providers/favorite-local-storage.provider';
+import { FAVORITE_PROVIDER } from './core/favorites/providers/favorite.provider';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -19,5 +21,6 @@ export const appConfig: ApplicationConfig = {
     provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' }),
     { provide: AUTH_PROVIDER, useClass: AuthFakeLocalProvider },
     { provide: BOOK_PROVIDER, useClass: OpenLibraryProvider },
+    { provide: FAVORITE_PROVIDER, useClass: FavoriteLocalStorageProvider },
   ],
 };

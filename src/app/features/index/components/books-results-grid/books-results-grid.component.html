@@ -1,5 +1,6 @@
 <div class="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
   @for (book of books; track book.id) {
+    @let isFavoriteBook = isFavorite(book.id);
     <article class="group">
       <div class="relative mb-4 aspect-3/4 overflow-hidden border-b-2 border-black bg-slate-100">
         <app-book-cover
@@ -7,14 +8,24 @@
           [alt]="book.title || ('index.grid.bookCoverAlt' | translate)"
         ></app-book-cover>
         <div
-          class="absolute right-3 top-3 translate-x-14 transition-transform duration-300 group-hover:translate-x-0"
+          class="absolute right-3 top-3 transition-transform duration-300"
+          [ngClass]="{
+            'translate-x-14': !isFavoriteBook,
+            'group-hover:translate-x-0': !isFavoriteBook,
+          }"
         >
           <button
             type="button"
-            class="cursor-pointer flex h-10 w-10 items-center justify-center border-2 border-black bg-white text-slate-900 transition hover:bg-black hover:text-white"
-            [attr.aria-label]="'index.grid.favoriteAria' | translate"
+            class="cursor-pointer flex h-10 w-10 items-center justify-center border-2 border-black bg-white transition"
+            [ngClass]="
+              isFavoriteBook
+                ? 'text-rose-800 hover:bg-rose-50'
+                : 'text-slate-900 hover:bg-black hover:text-white'
+            "
+            [attr.aria-label]="getFavoriteAriaLabel(book) | translate"
+            (click)="toggleFavorite(book)"
           >
-            <app-heart-icon [size]="18"></app-heart-icon>
+            <app-heart-icon [size]="18" [filled]="isFavoriteBook"></app-heart-icon>
           </button>
         </div>
       </div>
@@ -27,7 +38,9 @@
         {{ book.title || ('index.grid.untitled' | translate) }}
       </h3>
       <p class="mt-1 text-sm text-slate-600">
-        {{ book.authors.length ? book.authors.join(', ') : ('index.grid.unknownAuthor' | translate) }}
+        {{
+          book.authors.length ? book.authors.join(', ') : ('index.grid.unknownAuthor' | translate)
+        }}
       </p>
     </article>
   }

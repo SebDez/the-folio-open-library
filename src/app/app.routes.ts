@@ -19,6 +19,11 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./features/index/index.page').then((m) => m.IndexPage),
       },
+      {
+        path: 'favorites',
+        loadChildren: () =>
+          import('./features/favorites/favorites.routes').then((m) => m.FAVORITES_ROUTES),
+      },
     ],
   },
   { path: '**', redirectTo: '' }

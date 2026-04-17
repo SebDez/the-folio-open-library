@@ -33,6 +33,7 @@
             <a
               [routerLink]="module.route"
               routerLinkActive
+              [routerLinkActiveOptions]="{ exact: true }"
               #rla="routerLinkActive"
               [ngClass]="[
                 'cursor-pointer font-sans text-xs uppercase tracking-[0.2em]',
@@ -77,6 +78,7 @@
           [routerLink]="module.route"
           class="group flex items-center gap-4"
           routerLinkActive
+          [routerLinkActiveOptions]="{ exact: true }"
           #rla="routerLinkActive"
           [ngClass]="
             rla.isActive
@@ -97,6 +99,17 @@
             }
           }
           <span class="font-serif text-xl">{{ module.labelKey | translate }}</span>
+          @if (module.key === 'favorites' && favoriteStore.favoriteCount() > 0) {
+            <span
+              class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black text-[11px] font-bold leading-none text-white"
+              [attr.aria-label]="
+                'layouts.authenticated.aria.favoritesCount'
+                  | translate: { total: favoriteStore.favoriteCount() }
+              "
+            >
+              {{ favoriteStore.favoriteCount() }}
+            </span>
+          }
         </a>
       }
     </nav>

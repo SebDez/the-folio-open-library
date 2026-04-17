@@ -19,6 +19,7 @@ import { MenuIconComponent } from '../../shared/icons/menu-icon.component';
 import { SearchIconComponent } from '../../shared/icons/search-icon.component';
 import { HeartIconComponent } from '../../shared/icons/heart-icon.component';
 import { InfoCircleIconComponent } from '../../shared/icons/info-circle-icon.component';
+import { FavoriteStore } from '../../core/favorites/favorite.store';
 
 interface AuthenticatedLayoutModule {
   key: string;
@@ -69,6 +70,7 @@ export class AuthenticatedLayoutComponent {
 
   constructor(
     protected readonly authStore: AuthStore,
+    protected readonly favoriteStore: FavoriteStore,
     private readonly router: Router,
   ) {
     this.authStore.logoutObs$

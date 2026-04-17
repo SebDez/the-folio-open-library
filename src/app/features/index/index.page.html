@@ -46,7 +46,11 @@
         </p>
       </div>
 
-      <app-books-results-grid [books]="bookStore.books()"></app-books-results-grid>
+      <app-books-results-grid
+        [books]="bookStore.books()"
+        [favoriteIds]="favoriteStore.favoriteIds()"
+        (favoriteToggled)="toggleFavorite($event)"
+      ></app-books-results-grid>
 
       @if (bookStore.totalPages() > 1) {
         <app-books-pagination
