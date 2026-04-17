@@ -28,6 +28,10 @@ export const routes: Routes = [
         path: 'book',
         loadChildren: () => import('./features/book/book.routes').then((m) => m.BOOK_ROUTES),
       },
+      {
+        path: 'author',
+        loadChildren: () => import('./features/author/author.routes').then((m) => m.AUTHOR_ROUTES),
+      },
     ],
   },
   { path: '**', redirectTo: '' }

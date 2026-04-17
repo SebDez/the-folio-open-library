@@ -4,6 +4,7 @@ export interface OpenLibraryBookDto {
   key?: string;
   title?: string;
   author_name?: string[];
+  author_key?: string[];
   cover_i?: number;
   first_publish_year?: number;
 }
@@ -13,7 +14,9 @@ interface OpenLibraryBookDetailDescriptionDto {
 }
 
 interface OpenLibraryBookDetailAuthorDto {
-  key?: string;
+  author?: {
+    key?: string;
+  };
 }
 
 export interface OpenLibraryBookDetailDto {
@@ -30,6 +33,7 @@ export function mapOpenLibraryBookDtoToBookModel(doc: OpenLibraryBookDto): BookM
     id: doc.key ?? '',
     title: doc.title,
     authors: doc.author_name ?? [],
+    authorIds: doc.author_key ?? [],
     coverId: doc.cover_i,
     publishYear: doc.first_publish_year,
   };
@@ -42,7 +46,8 @@ export function mapOpenLibraryBookDetailDtoToBookDetailsModel(
   return {
     id: normalizedId,
     title: book.title,
-    authors: book.authors?.map((author) => author.key ?? '') ?? [],
+    authors: [],
+    authorIds: book.authors?.map((author) => author.author?.key ?? '') ?? [],
     coverId: book.covers?.find((coverId) => typeof coverId === 'number'),
     description: typeof book.description === 'string' ? book.description : book.description?.value,
     subjects: book.subjects ?? [],

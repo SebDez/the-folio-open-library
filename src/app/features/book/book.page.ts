@@ -5,6 +5,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { catchError, distinctUntilChanged, filter, map, of, switchMap, tap } from 'rxjs';
 
+import { AuthorModel } from '../../core/authors/models/author.model';
+import { AuthorService } from '../../core/authors/services/author.service';
 import { BookDetailsModel } from '../../core/books/models/book.model';
 import { BookService } from '../../core/books/services/book.service';
 import { FavoriteStore } from '../../core/favorites/favorite.store';
@@ -27,6 +29,7 @@ export class BookPage {
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly book = signal<BookDetailsModel | null>(null);
+  protected readonly authors = signal<AuthorModel[]>([]);
   protected readonly isLoading = signal<boolean>(true);
   protected readonly hasError = signal<boolean>(false);
 
@@ -38,6 +41,7 @@ export class BookPage {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly bookService: BookService,
+    private readonly authorService: AuthorService,
     protected readonly favoriteStore: FavoriteStore,
   ) {
     this.activatedRoute.paramMap
@@ -49,10 +53,15 @@ export class BookPage {
           this.isLoading.set(true);
           this.hasError.set(false);
           this.book.set(null);
+          this.authors.set([]);
         }),
         switchMap((bookId) =>
           this.bookService.getByBookId(bookId).pipe(
-            map((book) => ({ kind: 'success' as const, book })),
+            switchMap((book) =>
+              this.authorService.getByAuthorIds(book.authorIds ?? []).pipe(
+                map((authors) => ({ kind: 'success' as const, book, authors })),
+              ),
+            ),
             catchError(() => of({ kind: 'error' as const })),
           ),
         ),
@@ -66,6 +75,7 @@ export class BookPage {
         }
 
         this.book.set(event.book);
+        this.authors.set(event.authors);
       });
   }
 

@@ -2,6 +2,7 @@ export interface BookModel {
   id: string;
   title?: string;
   authors: string[];
+  authorIds?: string[];
   coverId?: number;
   publishYear?: number;
 }

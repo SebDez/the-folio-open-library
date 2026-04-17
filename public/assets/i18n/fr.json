@@ -97,6 +97,24 @@
       "noSubjects": "Aucun sujet disponible."
     }
   },
+  "author": {
+    "back": "Retour a la recherche",
+    "photoAlt": "Photo de l'auteur",
+    "unknownName": "Auteur inconnu",
+    "state": {
+      "loading": "Chargement de l'auteur...",
+      "error": "Impossible de charger cet auteur. Veuillez reessayer."
+    },
+    "meta": {
+      "birthDate": "Date de naissance",
+      "deathDate": "Date de deces",
+      "unknownBirthDate": "Inconnue"
+    },
+    "sections": {
+      "bio": "Biographie",
+      "noBio": "Aucune biographie disponible."
+    }
+  },
   "layouts": {
     "authenticated": {
       "name": "The folio",

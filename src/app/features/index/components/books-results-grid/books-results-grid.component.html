@@ -4,10 +4,10 @@
     <article class="group">
       <div class="relative mb-4 aspect-3/4 overflow-hidden border-b-2 border-black bg-slate-100">
         <a [routerLink]="getBookRoute(book.id)" class="block h-full w-full">
-          <app-book-cover
+          <app-image-displayer
             [src]="getBookCoverUrl(book.coverId)"
             [alt]="book.title || ('index.grid.bookCoverAlt' | translate)"
-          ></app-book-cover>
+          ></app-image-displayer>
         </a>
         <div
           class="absolute right-3 top-3 transition-transform duration-300"
@@ -40,9 +40,22 @@
         </a>
       </h3>
       <p class="mt-1 text-sm text-slate-600">
-        {{
-          book.authors.length ? book.authors.join(', ') : ('index.grid.unknownAuthor' | translate)
-        }}
+        @if (book.authors.length) {
+          @for (authorName of book.authors; track authorName; let index = $index) {
+            @if (getBookAuthorId(book, index); as authorId) {
+              <a [routerLink]="getAuthorRoute(authorId)" class="hover:underline">
+                {{ authorName }}
+              </a>
+            } @else {
+              <span>{{ authorName }}</span>
+            }
+            @if (index < book.authors.length - 1) {
+              <span>, </span>
+            }
+          }
+        } @else {
+          {{ 'index.grid.unknownAuthor' | translate }}
+        }
       </p>
     </article>
   }

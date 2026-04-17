@@ -97,6 +97,24 @@
       "noSubjects": "No subjects available."
     }
   },
+  "author": {
+    "back": "Back to search",
+    "photoAlt": "Author photo",
+    "unknownName": "Unknown author",
+    "state": {
+      "loading": "Loading author...",
+      "error": "Unable to load this author. Please try again."
+    },
+    "meta": {
+      "birthDate": "Birth date",
+      "deathDate": "Death date",
+      "unknownBirthDate": "Unknown"
+    },
+    "sections": {
+      "bio": "Biography",
+      "noBio": "No biography available."
+    }
+  },
   "layouts": {
     "authenticated": {
       "name": "The folio",

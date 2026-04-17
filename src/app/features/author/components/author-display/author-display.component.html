@@ -1,0 +1,45 @@
+<section class="grid grid-cols-1 gap-10 md:grid-cols-3">
+  <aside class="order-2 md:order-1 col-span-1">
+    <div class="inline-block w-full md:max-w-[300px] border-l-2 border-b-2 border-black p-4">
+      <div class="aspect-3/4 overflow-hidden bg-slate-100">
+        <app-image-displayer
+          [src]="getAuthorPhotoUrl(author.photoId)"
+          [alt]="author.name || ('author.photoAlt' | translate)"
+          [cursorPointer]="false"
+        ></app-image-displayer>
+      </div>
+    </div>
+  </aside>
+
+  <div class="order-1 space-y-6 md:order-2 md:col-span-2">
+    <div class="border-b-2 border-black pb-6">
+      <h1 class="font-serif text-4xl font-semibold leading-tight text-slate-900 md:text-6xl">
+        {{ author.name || ('author.unknownName' | translate) }}
+      </h1>
+    </div>
+
+    <div class="space-y-2 text-sm text-slate-600">
+      <p>
+        <span class="font-semibold text-slate-900">{{ 'author.meta.birthDate' | translate }}:</span>
+        {{ author.birthDate || ('author.meta.unknownBirthDate' | translate) }}
+      </p>
+      @if (author.deathDate) {
+        <p>
+          <span class="font-semibold text-slate-900"
+            >{{ 'author.meta.deathDate' | translate }}:</span
+          >
+          {{ author.deathDate }}
+        </p>
+      }
+    </div>
+
+    <section class="space-y-3">
+      <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+        {{ 'author.sections.bio' | translate }}
+      </h2>
+      <p class="text-sm leading-relaxed text-slate-700 text-justify">
+        {{ author.bio || ('author.sections.noBio' | translate) }}
+      </p>
+    </section>
+  </div>
+</section>

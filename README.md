@@ -61,6 +61,7 @@ This project focuses on a few clear principles:
 
 ## Next Improvements
 
+- Missing feature : in author detail page : author's books list
 - Automated tests
 - Stronger form validation
 - Accessibility improvements

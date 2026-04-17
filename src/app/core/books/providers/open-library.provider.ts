@@ -40,6 +40,7 @@ export class OpenLibraryProvider implements BookProvider {
             return {
               ...mappedBook,
               id: this.normalizeBookId(mappedBook.id),
+              authorIds: mappedBook.authorIds?.map((authorId) => this.normalizeAuthorId(authorId)),
             };
           }),
           total: response.numFound,
@@ -56,10 +57,17 @@ export class OpenLibraryProvider implements BookProvider {
       .get<OpenLibraryBookDetailDto>(`https://openlibrary.org/works/${normalizedBookId}.json`)
       .pipe(
         map((response) =>
-          mapOpenLibraryBookDetailDtoToBookDetailsModel(
-            response,
-            this.normalizeBookId(response.key ?? normalizedBookId),
-          ),
+          {
+            const mappedBook = mapOpenLibraryBookDetailDtoToBookDetailsModel(
+              response,
+              this.normalizeBookId(response.key ?? normalizedBookId),
+            );
+
+            return {
+              ...mappedBook,
+              authorIds: mappedBook.authorIds?.map((authorId) => this.normalizeAuthorId(authorId)),
+            };
+          },
         ),
       );
   }
@@ -71,5 +79,14 @@ export class OpenLibraryProvider implements BookProvider {
     }
 
     return trimmedValue.replace(/^\/works\//, '');
+  }
+
+  private normalizeAuthorId(value: string): string {
+    const trimmedValue = value.trim();
+    if (!trimmedValue) {
+      return '';
+    }
+
+    return trimmedValue.replace(/^\/authors\//, '');
   }
 }
