@@ -1,0 +1,43 @@
+<div class="mt-12 flex flex-wrap items-center justify-between gap-4 border-t-2 border-black pt-8">
+  <div class="flex items-center gap-3">
+    <button
+      type="button"
+      class="cursor-pointer flex h-12 w-12 items-center justify-center border-2 border-black text-sm font-semibold transition enabled:hover:bg-black enabled:hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+      [disabled]="!canGoPrevious || isLoading"
+      (click)="onPrevious()"
+      [attr.aria-label]="'index.pagination.previousAria' | translate"
+    >
+      &lt;
+    </button>
+    @for (page of visiblePages; track page) {
+      <button
+        type="button"
+        class="cursor-pointer flex h-12 min-w-12 items-center justify-center border-2 px-4 text-sm font-semibold transition disabled:cursor-not-allowed"
+        [ngClass]="
+          page === currentPage
+            ? 'border-black bg-black text-white'
+            : 'border-black text-black enabled:hover:bg-black enabled:hover:text-white'
+        "
+        [disabled]="isLoading || page === currentPage"
+        (click)="onSelectPage(page)"
+      >
+        {{ page }}
+      </button>
+    }
+    <button
+      type="button"
+      class="cursor-pointer flex h-12 w-12 items-center justify-center border-2 border-black text-sm font-semibold transition enabled:hover:bg-black enabled:hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+      [disabled]="!canGoNext || isLoading"
+      (click)="onNext()"
+      [attr.aria-label]="'index.pagination.nextAria' | translate"
+    >
+      &gt;
+    </button>
+  </div>
+  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+    {{
+      'index.pagination.showing'
+        | translate: { start: startItem, end: endItem, total: totalResults }
+    }}
+  </p>
+</div>

@@ -11,4 +11,6 @@ export class FolioButtonComponent {
   @Input() type: 'button' | 'submit' = 'button';
   @Input() loading = false;
   @Input() disabled = false;
+  @Input() fullHeight = false;
+  @Input() fullWidth = false;
 }

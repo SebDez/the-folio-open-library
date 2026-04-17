@@ -3,4 +3,5 @@ export interface BookModel {
   title?: string;
   authors: string[];
   coverId?: number;
+  publishYear?: number;
 }

@@ -63,6 +63,15 @@ export class BookStore {
     this._fetchPage(this._currentPage() - 1);
   }
 
+  goToPage(pageNumber: number): void {
+    if (this._isSearching()) return;
+    const totalPages = this.totalPages();
+    if (totalPages <= 0) return;
+    const targetPage = pageNumber - 1;
+    if (targetPage < 0 || targetPage >= totalPages || targetPage === this._currentPage()) return;
+    this._fetchPage(targetPage);
+  }
+
   private _fetchPage(pageIndex: number): void {
     const query = this._lastQuery();
     if (!query) return;

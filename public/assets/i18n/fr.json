@@ -21,6 +21,41 @@
     "title": "Bienvenue {{name}}",
     "subtitle": "Recherchez un livre par son nom"
   },
+  "index": {
+    "search": {
+      "placeholder": "Rechercher un titre de livre",
+      "cta": "Rechercher",
+      "loading": "Recherche..."
+    },
+    "state": {
+      "searching": "Recherche en cours...",
+      "error": "Nous n'avons pas pu rechercher les livres. Veuillez réessayer."
+    },
+    "result": {
+      "count": "{{total}} résultat(s)",
+      "page": "Page {{current}} / {{total}}"
+    },
+    "empty": {
+      "noResults": "Aucun résultat pour : {{query}}",
+      "initial": "Saisissez le titre d'un livre pour lancer votre recherche."
+    },
+    "grid": {
+      "bookCoverAlt": "Couverture du livre",
+      "favoriteAria": "Ajouter aux favoris",
+      "unknownPublishYear": "Année de publication inconnue",
+      "untitled": "Sans titre",
+      "unknownAuthor": "Auteur inconnu"
+    },
+    "cover": {
+      "noCover": "Pas de couverture",
+      "loading": "Chargement de la couverture"
+    },
+    "pagination": {
+      "previousAria": "Page précédente",
+      "nextAria": "Page suivante",
+      "showing": "Affichage de {{start}} à {{end}} sur {{total}} volumes"
+    }
+  },
   "layouts": {
     "authenticated": {
       "name": "The folio",

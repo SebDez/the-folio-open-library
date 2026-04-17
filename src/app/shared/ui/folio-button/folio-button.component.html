@@ -2,6 +2,8 @@
   [attr.type]="type"
   [disabled]="disabled"
   [attr.aria-busy]="loading"
+  [class.h-full]="fullHeight"
+  [class.w-full]="fullWidth"
   class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-none border-2 border-black bg-white px-4 py-2.5 font-sans text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors duration-150 hover:bg-black hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:pointer-events-none disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-black"
 >
   @if (!loading) {

@@ -21,6 +21,41 @@
     "title": "Welcome {{name}}",
     "subtitle": "Search for a book by its name"
   },
+  "index": {
+    "search": {
+      "placeholder": "Search a book title",
+      "cta": "Search",
+      "loading": "Searching..."
+    },
+    "state": {
+      "searching": "Searching...",
+      "error": "We couldn't search for books. Please try again."
+    },
+    "result": {
+      "count": "{{total}} Result(s)",
+      "page": "Page {{current}} / {{total}}"
+    },
+    "empty": {
+      "noResults": "No results for: {{query}}",
+      "initial": "Enter the title of a book to launch your search."
+    },
+    "grid": {
+      "bookCoverAlt": "Book cover",
+      "favoriteAria": "Add to favorites",
+      "unknownPublishYear": "Unknown publish year",
+      "untitled": "Untitled",
+      "unknownAuthor": "Unknown author"
+    },
+    "cover": {
+      "noCover": "No Cover",
+      "loading": "Loading Cover"
+    },
+    "pagination": {
+      "previousAria": "Previous page",
+      "nextAria": "Next page",
+      "showing": "Showing {{start}} - {{end}} of {{total}} volumes"
+    }
+  },
   "layouts": {
     "authenticated": {
       "name": "The folio",
