@@ -4,6 +4,8 @@ import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { OpenLibraryAuthorProvider } from './core/authors/providers/open-library-author.provider';
+import { AUTHOR_PROVIDER } from './core/authors/providers/author.provider';
 import { AuthFakeLocalProvider } from './core/auth/providers/auth-fake-local.provider';
 import { AUTH_PROVIDER } from './core/auth/providers/auth.provider';
 import { BOOK_PROVIDER } from './core/books/providers/book.provider';
@@ -21,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' }),
     { provide: AUTH_PROVIDER, useClass: AuthFakeLocalProvider },
     { provide: BOOK_PROVIDER, useClass: OpenLibraryProvider },
+    { provide: AUTHOR_PROVIDER, useClass: OpenLibraryAuthorProvider },
     { provide: FAVORITE_PROVIDER, useClass: FavoriteLocalStorageProvider },
   ],
 };

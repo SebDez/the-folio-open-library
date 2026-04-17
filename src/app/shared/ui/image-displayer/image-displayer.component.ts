@@ -2,17 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { BookIconComponent } from '../../../../shared/icons/book-icon.component';
+import { BookIconComponent } from '../../icons/book-icon.component';
 
 @Component({
-  selector: 'app-book-cover',
+  selector: 'app-image-displayer',
   standalone: true,
   imports: [CommonModule, TranslateModule, BookIconComponent],
-  templateUrl: './book-cover.component.html',
+  templateUrl: './image-displayer.component.html',
 })
-export class BookCoverComponent {
+export class ImageDisplayerComponent {
   @Input() src: string | null = null;
   @Input({ required: true }) alt = '';
+  @Input() cursorPointer = true;
+  @Input() emptyLabel = 'shared.image.noCover';
 
   protected isImageLoading = false;
   protected hasImageError = false;

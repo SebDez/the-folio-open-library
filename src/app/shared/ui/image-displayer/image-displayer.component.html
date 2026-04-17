@@ -4,7 +4,8 @@
       [src]="src"
       [alt]="alt"
       loading="lazy"
-      class="cursor-pointer h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+      class="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+      [class.cursor-pointer]="cursorPointer"
       [class.opacity-0]="!imageLoaded"
       [class.opacity-100]="imageLoaded"
       (loadstart)="onImageLoadStart()"
@@ -17,7 +18,7 @@
     <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center">
       <app-book-icon [size]="40" className="text-slate-400"></app-book-icon>
       <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500">
-        {{ 'index.cover.noCover' | translate }}
+        {{ emptyLabel | translate }}
       </p>
     </div>
   } @else if (!imageLoaded) {
@@ -27,7 +28,7 @@
         aria-hidden="true"
       ></div>
       <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500">
-        {{ 'index.cover.loading' | translate }}
+        {{ 'shared.image.loading' | translate }}
       </p>
     </div>
   }

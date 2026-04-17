@@ -1,0 +1,18 @@
+<main class="mx-auto w-full max-w-7xl px-6 py-10 md:px-10 md:py-12">
+  <a
+    routerLink="/"
+    class="mb-8 inline-flex items-center text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-900"
+  >
+    &lt; {{ 'author.back' | translate }}
+  </a>
+
+  @if (isLoading()) {
+    <app-books-empty-display
+      [message]="'author.state.loading' | translate"
+    ></app-books-empty-display>
+  } @else if (hasError()) {
+    <app-books-empty-display [message]="'author.state.error' | translate"></app-books-empty-display>
+  } @else if (author(); as currentAuthor) {
+    <app-author-display [author]="currentAuthor"></app-author-display>
+  }
+</main>

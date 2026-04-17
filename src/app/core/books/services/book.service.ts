@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { BookDetailsModel } from '../models/book.model';
 import { BOOK_PROVIDER, BookProvider } from '../providers/book.provider';
 import { BookSearchResultModel } from '../models/book-search-result.model';
 import { BookSearchPageParams } from '../models/book-search-params.model';
@@ -28,5 +29,9 @@ export class BookService {
       take,
       skip,
     });
+  }
+
+  getByBookId(bookId: string): Observable<BookDetailsModel> {
+    return this.bookProvider.getByBookId(bookId.trim());
   }
 }

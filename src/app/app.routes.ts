@@ -24,6 +24,18 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/favorites/favorites.routes').then((m) => m.FAVORITES_ROUTES),
       },
+      {
+        path: 'book',
+        loadChildren: () => import('./features/book/book.routes').then((m) => m.BOOK_ROUTES),
+      },
+      {
+        path: 'author',
+        loadChildren: () => import('./features/author/author.routes').then((m) => m.AUTHOR_ROUTES),
+      },
+      {
+        path: 'about',
+        loadChildren: () => import('./features/about/about.routes').then((m) => m.ABOUT_ROUTES),
+      },
     ],
   },
   { path: '**', redirectTo: '' }

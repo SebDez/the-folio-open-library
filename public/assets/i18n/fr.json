@@ -2,6 +2,12 @@
   "common": {
     "ariaLanguage": "Langue"
   },
+  "shared": {
+    "image": {
+      "noCover": "Pas de couverture",
+      "loading": "Chargement de la couverture"
+    }
+  },
   "auth": {
     "login": {
       "metaKicker": "The Folio / Authentification",
@@ -53,10 +59,6 @@
       "untitled": "Sans titre",
       "unknownAuthor": "Auteur inconnu"
     },
-    "cover": {
-      "noCover": "Pas de couverture",
-      "loading": "Chargement de la couverture"
-    },
     "pagination": {
       "previousAria": "Page précédente",
       "nextAria": "Page suivante",
@@ -71,6 +73,50 @@
       "count": "{{total}} favori(s)"
     },
     "empty": "Aucun favori pour le moment. Ajoutez-en depuis la recherche."
+  },
+  "book": {
+    "back": "Retour a la recherche",
+    "coverAlt": "Couverture du livre",
+    "untitled": "Sans titre",
+    "state": {
+      "loading": "Chargement du livre...",
+      "error": "Impossible de charger ce livre. Veuillez reessayer."
+    },
+    "meta": {
+      "authors": "Auteurs",
+      "publishYear": "Premiere publication",
+      "unknownAuthor": "Auteur inconnu",
+      "unknownPublishYear": "Annee inconnue"
+    },
+    "favorite": {
+      "add": "Ajouter aux favoris",
+      "remove": "Retirer des favoris"
+    },
+    "sections": {
+      "description": "Description",
+      "subjects": "Sujets",
+      "noDescription": "Aucune description disponible.",
+      "noSubjects": "Aucun sujet disponible."
+    }
+  },
+  "author": {
+    "back": "Retour a la recherche",
+    "photoAlt": "Photo de l'auteur",
+    "photoMissing": "Photo indisponible",
+    "unknownName": "Auteur inconnu",
+    "state": {
+      "loading": "Chargement de l'auteur...",
+      "error": "Impossible de charger cet auteur. Veuillez reessayer."
+    },
+    "meta": {
+      "birthDate": "Date de naissance",
+      "deathDate": "Date de deces",
+      "unknownBirthDate": "Inconnue"
+    },
+    "sections": {
+      "bio": "Biographie",
+      "noBio": "Aucune biographie disponible."
+    }
   },
   "layouts": {
     "authenticated": {

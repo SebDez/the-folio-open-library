@@ -2,6 +2,12 @@
   "common": {
     "ariaLanguage": "Language"
   },
+  "shared": {
+    "image": {
+      "noCover": "No Cover",
+      "loading": "Loading Cover"
+    }
+  },
   "auth": {
     "login": {
       "metaKicker": "The Folio / Authentication",
@@ -53,10 +59,6 @@
       "untitled": "Untitled",
       "unknownAuthor": "Unknown author"
     },
-    "cover": {
-      "noCover": "No Cover",
-      "loading": "Loading Cover"
-    },
     "pagination": {
       "previousAria": "Previous page",
       "nextAria": "Next page",
@@ -71,6 +73,50 @@
       "count": "{{total}} Favorite(s)"
     },
     "empty": "No favorites yet. Add some from search."
+  },
+  "book": {
+    "back": "Back to search",
+    "coverAlt": "Book cover",
+    "untitled": "Untitled",
+    "state": {
+      "loading": "Loading book...",
+      "error": "Unable to load this book. Please try again."
+    },
+    "meta": {
+      "authors": "Authors",
+      "publishYear": "First publication",
+      "unknownAuthor": "Unknown author",
+      "unknownPublishYear": "Unknown year"
+    },
+    "favorite": {
+      "add": "Add to favorites",
+      "remove": "Remove from favorites"
+    },
+    "sections": {
+      "description": "Description",
+      "subjects": "Subjects",
+      "noDescription": "No description available.",
+      "noSubjects": "No subjects available."
+    }
+  },
+  "author": {
+    "back": "Back to search",
+    "photoAlt": "Author photo",
+    "photoMissing": "Photo unavailable",
+    "unknownName": "Unknown author",
+    "state": {
+      "loading": "Loading author...",
+      "error": "Unable to load this author. Please try again."
+    },
+    "meta": {
+      "birthDate": "Birth date",
+      "deathDate": "Death date",
+      "unknownBirthDate": "Unknown"
+    },
+    "sections": {
+      "bio": "Biography",
+      "noBio": "No biography available."
+    }
   },
   "layouts": {
     "authenticated": {
