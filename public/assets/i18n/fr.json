@@ -72,6 +72,31 @@
     },
     "empty": "Aucun favori pour le moment. Ajoutez-en depuis la recherche."
   },
+  "book": {
+    "back": "Retour a la recherche",
+    "coverAlt": "Couverture du livre",
+    "untitled": "Sans titre",
+    "state": {
+      "loading": "Chargement du livre...",
+      "error": "Impossible de charger ce livre. Veuillez reessayer."
+    },
+    "meta": {
+      "authors": "Auteurs",
+      "publishYear": "Premiere publication",
+      "unknownAuthor": "Auteur inconnu",
+      "unknownPublishYear": "Annee inconnue"
+    },
+    "favorite": {
+      "add": "Ajouter aux favoris",
+      "remove": "Retirer des favoris"
+    },
+    "sections": {
+      "description": "Description",
+      "subjects": "Sujets",
+      "noDescription": "Aucune description disponible.",
+      "noSubjects": "Aucun sujet disponible."
+    }
+  },
   "layouts": {
     "authenticated": {
       "name": "The folio",

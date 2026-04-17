@@ -72,6 +72,31 @@
     },
     "empty": "No favorites yet. Add some from search."
   },
+  "book": {
+    "back": "Back to search",
+    "coverAlt": "Book cover",
+    "untitled": "Untitled",
+    "state": {
+      "loading": "Loading book...",
+      "error": "Unable to load this book. Please try again."
+    },
+    "meta": {
+      "authors": "Authors",
+      "publishYear": "First publication",
+      "unknownAuthor": "Unknown author",
+      "unknownPublishYear": "Unknown year"
+    },
+    "favorite": {
+      "add": "Add to favorites",
+      "remove": "Remove from favorites"
+    },
+    "sections": {
+      "description": "Description",
+      "subjects": "Subjects",
+      "noDescription": "No description available.",
+      "noSubjects": "No subjects available."
+    }
+  },
   "layouts": {
     "authenticated": {
       "name": "The folio",

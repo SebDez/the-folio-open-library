@@ -5,3 +5,8 @@ export interface BookModel {
   coverId?: number;
   publishYear?: number;
 }
+
+export interface BookDetailsModel extends BookModel {
+  description?: string;
+  subjects: string[];
+}

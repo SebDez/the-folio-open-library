@@ -1,0 +1,73 @@
+<section class="grid grid-cols-1 gap-10 md:grid-cols-2">
+  <aside class="order-2 space-y-6 md:order-1">
+    <div
+      class="w-full max-w-[220px] aspect-3/4 overflow-hidden border-b-2 border-black bg-slate-100"
+    >
+      <app-book-cover
+        [src]="getBookCoverUrl(book.coverId)"
+        [alt]="book.title || ('book.coverAlt' | translate)"
+        [cursorPointer]="false"
+      ></app-book-cover>
+    </div>
+
+    <div class="space-y-2 text-sm text-slate-600">
+      <p>
+        <span class="font-semibold text-slate-900">{{ 'book.meta.authors' | translate }}:</span>
+        {{
+          book.authors.length ? book.authors.join(', ') : ('book.meta.unknownAuthor' | translate)
+        }}
+      </p>
+      <p>
+        <span class="font-semibold text-slate-900">{{ 'book.meta.publishYear' | translate }}:</span>
+        {{ book.publishYear || ('book.meta.unknownPublishYear' | translate) }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="inline-flex cursor-pointer items-center gap-2 border-2 border-black px-4 py-2 text-sm font-semibold transition hover:bg-black hover:text-white"
+      [ngClass]="isFavorite ? 'text-rose-800 hover:text-rose-100' : 'text-slate-900'"
+      (click)="onFavoriteToggle()"
+    >
+      <app-heart-icon [size]="16" [filled]="isFavorite"></app-heart-icon>
+      {{ isFavorite ? ('book.favorite.remove' | translate) : ('book.favorite.add' | translate) }}
+    </button>
+  </aside>
+
+  <div class="order-1 space-y-8 md:order-2">
+    <div class="border-b-2 border-black pb-6">
+      <h1 class="font-serif text-4xl font-semibold leading-tight text-slate-900 md:text-6xl">
+        {{ book.title || ('book.untitled' | translate) }}
+      </h1>
+    </div>
+
+    <section class="space-y-3">
+      <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+        {{ 'book.sections.description' | translate }}
+      </h2>
+      <p class="text-sm leading-relaxed text-slate-700">
+        {{ book.description || ('book.sections.noDescription' | translate) }}
+      </p>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+        {{ 'book.sections.subjects' | translate }}
+      </h2>
+
+      @if (book.subjects.length) {
+        <div class="flex flex-wrap gap-2">
+          @for (subject of book.subjects; track subject) {
+            <span
+              class="inline-flex items-center border border-slate-300 bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700"
+            >
+              {{ subject }}
+            </span>
+          }
+        </div>
+      } @else {
+        <p class="text-sm text-slate-500">{{ 'book.sections.noSubjects' | translate }}</p>
+      }
+    </section>
+  </div>
+</section>

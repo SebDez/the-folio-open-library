@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { BookModel } from '../../../../core/books/models/book.model';
@@ -9,7 +10,7 @@ import { BookCoverComponent } from '../book-cover/book-cover.component';
 @Component({
   selector: 'app-books-results-grid',
   standalone: true,
-  imports: [CommonModule, TranslateModule, HeartIconComponent, BookCoverComponent],
+  imports: [CommonModule, RouterModule, TranslateModule, HeartIconComponent, BookCoverComponent],
   templateUrl: './books-results-grid.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -20,6 +21,10 @@ export class BooksResultsGridComponent {
 
   protected getBookCoverUrl(coverId?: number): string | null {
     return coverId ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg` : null;
+  }
+
+  protected getBookRoute(bookId: string): string[] {
+    return ['/book', bookId];
   }
 
   protected toggleFavorite(book: BookModel): void {

@@ -4,8 +4,11 @@ import { Observable, map } from 'rxjs';
 
 import {
   mapOpenLibraryBookDtoToBookModel,
+  mapOpenLibraryBookDetailDtoToBookDetailsModel,
   OpenLibraryBookDto,
+  OpenLibraryBookDetailDto,
 } from '../mappers/open-library-book.mapper';
+import { BookDetailsModel } from '../models/book.model';
 import { BookSearchResultModel } from '../models/book-search-result.model';
 import { BookSearchPageParams } from '../models/book-search-params.model';
 import { BookProvider } from './book.provider';
@@ -32,11 +35,41 @@ export class OpenLibraryProvider implements BookProvider {
       })
       .pipe(
         map((response) => ({
-          books: response.docs.map(mapOpenLibraryBookDtoToBookModel),
+          books: response.docs.map((doc) => {
+            const mappedBook = mapOpenLibraryBookDtoToBookModel(doc);
+            return {
+              ...mappedBook,
+              id: this.normalizeBookId(mappedBook.id),
+            };
+          }),
           total: response.numFound,
           skip: response.start,
           take,
         })),
       );
+  }
+
+  getByBookId(bookId: string): Observable<BookDetailsModel> {
+    const normalizedBookId = this.normalizeBookId(bookId);
+
+    return this.httpClient
+      .get<OpenLibraryBookDetailDto>(`https://openlibrary.org/works/${normalizedBookId}.json`)
+      .pipe(
+        map((response) =>
+          mapOpenLibraryBookDetailDtoToBookDetailsModel(
+            response,
+            this.normalizeBookId(response.key ?? normalizedBookId),
+          ),
+        ),
+      );
+  }
+
+  private normalizeBookId(value: string): string {
+    const trimmedValue = value.trim();
+    if (!trimmedValue) {
+      return '';
+    }
+
+    return trimmedValue.replace(/^\/works\//, '');
   }
 }
