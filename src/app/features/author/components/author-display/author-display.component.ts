@@ -13,8 +13,13 @@ import { ImageDisplayerComponent } from '../../../../shared/ui/image-displayer/i
 })
 export class AuthorDisplayComponent {
   @Input({ required: true }) author!: AuthorModel;
+  @Input() customPhotoUrl: string | null = null;
 
   protected getAuthorPhotoUrl(photoId?: number): string | null {
+    if (this.customPhotoUrl?.trim()) {
+      return this.customPhotoUrl.trim();
+    }
+
     return photoId ? `https://covers.openlibrary.org/a/id/${photoId}-M.jpg` : null;
   }
 }

@@ -5,6 +5,7 @@
         <app-image-displayer
           [src]="getAuthorPhotoUrl(author.photoId)"
           [alt]="author.name || ('author.photoAlt' | translate)"
+          [emptyLabel]="'author.photoMissing'"
           [cursorPointer]="false"
         ></app-image-displayer>
       </div>

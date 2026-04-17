@@ -32,6 +32,10 @@ export const routes: Routes = [
         path: 'author',
         loadChildren: () => import('./features/author/author.routes').then((m) => m.AUTHOR_ROUTES),
       },
+      {
+        path: 'about',
+        loadChildren: () => import('./features/about/about.routes').then((m) => m.ABOUT_ROUTES),
+      },
     ],
   },
   { path: '**', redirectTo: '' }

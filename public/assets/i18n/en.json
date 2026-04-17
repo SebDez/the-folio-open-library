@@ -102,6 +102,7 @@
   "author": {
     "back": "Back to search",
     "photoAlt": "Author photo",
+    "photoMissing": "Photo unavailable",
     "unknownName": "Unknown author",
     "state": {
       "loading": "Loading author...",

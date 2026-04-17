@@ -14,6 +14,7 @@ export class ImageDisplayerComponent {
   @Input() src: string | null = null;
   @Input({ required: true }) alt = '';
   @Input() cursorPointer = true;
+  @Input() emptyLabel = 'shared.image.noCover';
 
   protected isImageLoading = false;
   protected hasImageError = false;
