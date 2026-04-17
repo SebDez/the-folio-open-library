@@ -1,9 +1,12 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, DestroyRef, Injectable, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject, catchError, map, of, switchMap } from 'rxjs';
 import { BookModel } from './models/book.model';
 import { BookService } from './services/book.service';
 
 @Injectable({ providedIn: 'root' })
 export class BookStore {
+  private readonly destroyRef = inject(DestroyRef);
   readonly PAGE_SIZE = 10;
 
   // Internal state
@@ -15,6 +18,7 @@ export class BookStore {
   private readonly _lastFetchedPage = signal<number>(-1);
   private readonly _isSearching = signal<boolean>(false);
   private readonly _hasErrorWhileSearching = signal<boolean>(false);
+  private readonly _searchRequests$ = new Subject<{ query: string; pageIndex: number }>();
 
   // Selectors
   readonly books = this._books.asReadonly();
@@ -34,7 +38,37 @@ export class BookStore {
   });
   readonly hasPreviousPage = computed<boolean>(() => this._currentPage() > 0);
 
-  constructor(private readonly bookService: BookService) {}
+  constructor(private readonly bookService: BookService) {
+    this._searchRequests$
+      .pipe(
+        switchMap(({ query, pageIndex }) =>
+          this.bookService
+            .searchByTitle({
+              title: query,
+              take: this.PAGE_SIZE,
+              skip: pageIndex * this.PAGE_SIZE,
+            })
+            .pipe(
+              map((result) => ({ kind: 'success' as const, result, query, pageIndex })),
+              catchError(() => of({ kind: 'error' as const })),
+            ),
+        ),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((event) => {
+        this._isSearching.set(false);
+        if (event.kind === 'error') {
+          this._hasErrorWhileSearching.set(true);
+          return;
+        }
+
+        this._books.set(event.result.books);
+        this._total.set(event.result.total);
+        this._currentPage.set(event.pageIndex);
+        this._lastFetchedQuery.set(event.query);
+        this._lastFetchedPage.set(event.pageIndex);
+      });
+  }
 
   searchByTitle(title: string): void {
     const trimmedTitle = title.trim();
@@ -86,28 +120,6 @@ export class BookStore {
     this._isSearching.set(true);
     this._hasErrorWhileSearching.set(false);
 
-    const offset = pageIndex * this.PAGE_SIZE;
-    this.bookService
-      .searchByTitle({
-        title: query,
-        take: this.PAGE_SIZE,
-        skip: offset,
-      })
-      .subscribe({
-        next: (result) => {
-          this._books.set(result.books);
-          this._total.set(result.total);
-          this._currentPage.set(pageIndex);
-          this._lastFetchedQuery.set(query);
-          this._lastFetchedPage.set(pageIndex);
-        },
-        error: () => {
-          this._isSearching.set(false);
-          this._hasErrorWhileSearching.set(true);
-        },
-        complete: () => {
-          this._isSearching.set(false);
-        },
-      });
+    this._searchRequests$.next({ query, pageIndex });
   }
 }

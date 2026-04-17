@@ -2,23 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
+import {
+  mapOpenLibraryBookDtoToBookModel,
+  OpenLibraryBookDto,
+} from '../mappers/open-library-book.mapper';
 import { BookSearchResultModel } from '../models/book-search-result.model';
 import { BookSearchPageParams } from '../models/book-search-params.model';
 import { BookProvider } from './book.provider';
-import { BookModel } from '../models/book.model';
-
-interface OpenLibraryBook {
-  key?: string;
-  title?: string;
-  author_name?: string[];
-  cover_i?: number;
-  first_publish_year?: number;
-}
 
 interface OpenLibrarySearchResponse {
   numFound: number;
   start: number;
-  docs: OpenLibraryBook[];
+  docs: OpenLibraryBookDto[];
 }
 
 @Injectable()
@@ -37,21 +32,11 @@ export class OpenLibraryProvider implements BookProvider {
       })
       .pipe(
         map((response) => ({
-          books: response.docs.map((doc) => this.mapToBookModel(doc)),
+          books: response.docs.map(mapOpenLibraryBookDtoToBookModel),
           total: response.numFound,
           skip: response.start,
           take,
         })),
       );
-  }
-
-  private mapToBookModel(doc: OpenLibraryBook): BookModel {
-    return {
-      id: doc.key ?? '',
-      title: doc.title,
-      authors: doc.author_name ?? [],
-      coverId: doc.cover_i,
-      publishYear: doc.first_publish_year,
-    };
   }
 }

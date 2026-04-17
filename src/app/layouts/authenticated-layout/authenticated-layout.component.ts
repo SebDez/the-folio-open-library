@@ -1,4 +1,12 @@
-import { Component, DestroyRef, HostListener, inject, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  HostListener,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { NgClass } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
@@ -38,6 +46,8 @@ interface AuthenticatedLayoutModule {
 })
 export class AuthenticatedLayoutComponent {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly menuToggleButton = viewChild<ElementRef<HTMLButtonElement>>('menuToggleButton');
+  private readonly sidebarPanel = viewChild<ElementRef<HTMLElement>>('sidebarPanel');
   protected readonly isSidebarOpen = signal(this.getInitialSidebarState());
   protected readonly modules = signal<AuthenticatedLayoutModule[]>([
     {
@@ -71,11 +81,23 @@ export class AuthenticatedLayoutComponent {
   }
 
   protected toggleSidebar(): void {
-    this.isSidebarOpen.update((isOpen) => !isOpen);
+    const shouldOpen = !this.isSidebarOpen();
+    this.isSidebarOpen.set(shouldOpen);
+    if (shouldOpen) {
+      this.focusSidebarPanel();
+      return;
+    }
+
+    this.focusMenuButton();
   }
 
   protected closeSidebar(): void {
+    if (!this.isSidebarOpen()) {
+      return;
+    }
+
     this.isSidebarOpen.set(false);
+    this.focusMenuButton();
   }
 
   protected handleSidebarNavigation(): void {
@@ -88,7 +110,19 @@ export class AuthenticatedLayoutComponent {
   protected onWindowResize(): void {
     if (typeof window !== 'undefined' && window.innerWidth >= 1024 && !this.isSidebarOpen()) {
       this.isSidebarOpen.set(true);
+      this.focusSidebarPanel();
     }
+  }
+
+  @HostListener('document:keydown.escape')
+  protected onEscapeKeydown(): void {
+    if (this.isMobileViewport() && this.isSidebarOpen()) {
+      this.closeSidebar();
+    }
+  }
+
+  protected isMobileViewport(): boolean {
+    return typeof window !== 'undefined' && window.innerWidth < 1024;
   }
 
   private getInitialSidebarState(): boolean {
@@ -97,5 +131,13 @@ export class AuthenticatedLayoutComponent {
     }
 
     return window.innerWidth >= 1024;
+  }
+
+  private focusMenuButton(): void {
+    this.menuToggleButton()?.nativeElement.focus();
+  }
+
+  private focusSidebarPanel(): void {
+    this.sidebarPanel()?.nativeElement.focus();
   }
 }

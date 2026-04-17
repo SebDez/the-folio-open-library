@@ -19,7 +19,7 @@
   "home": {
     "kicker": "The folio",
     "title": "Bienvenue {{name}}",
-    "subtitle": "Recherchez un livre par son nom"
+    "subtitle": "Cherchez un livre par titre ou auteur… et laissez-vous surprendre par de nouvelles découvertes !"
   },
   "index": {
     "search": {

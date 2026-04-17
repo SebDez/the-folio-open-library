@@ -12,7 +12,7 @@ import { BookIconComponent } from '../../../../shared/icons/book-icon.component'
 })
 export class BookCoverComponent {
   @Input() src: string | null = null;
-  @Input() alt = 'Book cover';
+  @Input({ required: true }) alt = '';
 
   protected isImageLoading = false;
   protected hasImageError = false;

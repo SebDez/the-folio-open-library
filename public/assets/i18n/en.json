@@ -19,7 +19,7 @@
   "home": {
     "kicker": "The folio",
     "title": "Welcome {{name}}",
-    "subtitle": "Search for a book by its name"
+    "subtitle": "Search for a book by title or author… and let yourself be surprised by new discoveries!"
   },
   "index": {
     "search": {
