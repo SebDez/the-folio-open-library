@@ -15,7 +15,7 @@
       "subtitle": "Please identify yourself to access your personal digital archive.",
       "left": {
         "brand": "THE FOLIO",
-        "kicker": "J.R.R. Tolkien / The Lord of the Rings: The Fellowship of the Ring",
+        "kicker": "J.R.R. Tolkien / The Lord of the Rings: The Two Towers",
         "quote": "\"There is some good in this world, Mr. Frodo, and it's worth fighting for.\"",
         "footer": "© SebDez 2026"
       },
@@ -134,5 +134,9 @@
         "about": "About"
       }
     }
+  },
+  "about": {
+    "name": "Sebastien Dez",
+    "bio": "Fullstack JavaScript developer with 12 years of experience, I combine the rigor of Clean Code with a human-centric mentoring approach (scrum master, junior mentoring). My expertise (Vue.js, NestJS, Angular, Nuxt) is at the service of the creation of durable solutions and the sharing of knowledge within teams. I apply an Artisan Developer approach based on \"Bienvaillance\" : the balance between human kindness (mentoring, user listening) and technical vigilance (rigor, maintenance, performance). My goal : deliver durable business value through clean code and a culture of continuous improvement."
   }
 }

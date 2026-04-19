@@ -15,7 +15,7 @@
       "subtitle": "Identifiez-vous pour accéder à votre archive numérique personnelle.",
       "left": {
         "brand": "THE FOLIO",
-        "kicker": "J.R.R. Tolkien / Le Seigneur des anneaux : La Communauté de l'Anneau",
+        "kicker": "J.R.R. Tolkien / Le Seigneur des anneaux : Les deux tours",
         "quote": "\"Il y a du bon en ce monde, monsieur Frodon, et il faut se battre pour cela.\"",
         "footer": "© SebDez 2026"
       },
@@ -134,5 +134,9 @@
         "about": "À propos"
       }
     }
+  },
+  "about": {
+    "name": "Sébastien Dez",
+    "bio": "Développeur Fullstack JavaScript avec 12 ans d'expérience, j'allie la rigueur du Clean Code à une approche humaine du mentoring (scrum master, accompagnement juniors). Mon expertise (Vue.js, NestJS, Angular, Nuxt) est au service de la création de solutions durables et du partage de connaissances au sein des équipes. J’applique une approche d’Artisan Développeur basée sur la \"Bienvaillance\" : l’équilibre entre la bienveillance humaine (mentoring, écoute utilisateur) et la vigilance technique (rigueur, maintenance, performance). Mon objectif : délivrer de la valeur métier durable au travers d’un code propre et d’une culture d'amélioration continue."
   }
 }
